@@ -1,32 +1,48 @@
 // Tutorial: https://youtu.be/BDpBAFvdjYo
 const data = [
-  { name: "0-19", value: 63311, est: 10001 },
-  { name: "20-29", value: 89634, est: 10001 },
-  { name: "30-39", value: 82440, est: 10001 },
-  { name: "40-49", value: 82030, est: 10001 },
-  { name: "50-59", value: 76691, est: 10001 },
-  { name: "60-69", value: 43658, est: 10001 },
-	{ name: "70-79", value: 29677, est: 10001 },
-	{ name: "80+", value: 44883, est: 10001 }
+  { name: "0-19", value: 63311, est: 10000 },
+  { name: "20-29", value: 89634, est: 10000 },
+  { name: "30-39", value: 82440, est: 10000 },
+  { name: "40-49", value: 82030, est: 10000 },
+  { name: "50-59", value: 76691, est: 10000 },
+  { name: "60-69", value: 43658, est: 10000 },
+	{ name: "70-79", value: 29677, est: 10000 },
+	{ name: "80+", value: 44883, est: 10000 }
 ];
+
+// ORIGINAL RED GREEN
+// const barColor = "#3F3F3F";
+// const barHoverColor = '#b3b3b3';
+// const colorUp = "#53c88d";
+// const colorUpHover = "#CBEEDC";
+// const colorUpText = "#42A070";
+// const colorDown = "#ed403c";
+// const colorDownHover = "#F9C5C4";
+// const colorDownText = "#BD3330";
 
 // BLUE ORANGE
 // const barColor = "#5B5B5B";
 // const barHoverColor = '#b3b3b3';
 // const colorUp = "#FFA500";
 // const colorUpHover = "#ffe4b2";
+// const colorUpText = "#FFA500";
 // const colorDown = "#005AFF";
 // const colorDownHover = "#b2cdff";
+// const colorDownText = "#005AFF";
 
-// RED GREEN
+// SOFTER RED & LIGHTER GREEN
 const barColor = "#3F3F3F";
 const barHoverColor = '#b3b3b3';
-const colorUp = "#53c88d";
-const colorUpHover = "#CBEEDC";
+const colorUp = "#6fdc8c";
+const colorUpHover = "#d3f4dc";
 const colorUpText = "#42A070";
-const colorDown = "#ed403c";
-const colorDownHover = "#F9C5C4";
+const colorDown = "#f0695f";
+const colorDownHover = "#fbdddb";
 const colorDownText = "#BD3330";
+const barOutlineColor = "rgba(63,63,63,0.1)";
+const barOutlineColorHover = "rgba(63,63,63,0.03)";
+
+const borderWidth = 1.5;
 
 const animationDuration = 2000;
 const waitDuration = 1000;
@@ -93,13 +109,16 @@ var tool_tip = d3.tip()
 			
 		}
 	);
+
 	
 // DRAG FUNCTIONALITY (https://github.com/d3/d3-brush)
 var brushY = d3.brushY()
 	// SET OVERLAY IN WHICH TO EXPAND/SHRINK THE BAR
   .extent(function (d, i) {
-       return [[x(i), y(maxYVal + maxYVal/6)],
-							[x(i) + x.bandwidth(), y(maxYVal/20)]];})
+			 return [[x(i), y(maxYVal + maxYVal/6)],
+			 				// Set minimal value
+							// [x(i) + x.bandwidth(), y(maxYVal/20)]];})
+							[x(i) + x.bandwidth(), y(1)]];})
 	.on("start", startMoveY)
 	.on("brush", brushmoveY)
 	.on("end", endMoveY)
@@ -121,12 +140,11 @@ svg
   .enter()
     .append('g')
       .attr('class', 'brush')
-		.append('g')
-			.call(brushY)
+		.call(brushY)
 			// SET INITIAL HEIGHT
 			.call(brushY.move, function (d){return [d.est, 0].map(y);});
 
-d3.selectAll('.brush>g>.handle--s').remove();
+d3.selectAll('.brush>.handle--s').remove();
 
 svg.selectAll("rect").filter(".selection")
 	.attr("id", function(d,i){ return "bar"+i})
@@ -134,6 +152,7 @@ svg.selectAll("rect").filter(".selection")
 	.on("mouseout", function(d, i) { if(!animating) {handleMouseOutEst(d,i)}});
 
 svg.selectAll("rect").filter(".handle--n")
+	.attr("id", function(d,i){ return "handle"+i})
 	.on("mouseover", function(d, i) { if(!animating) {handleMouseOverEst(d, i)}})
 	.on("mouseout", function(d, i) { if(!animating) {handleMouseOutEst(d,i)}});
 
@@ -178,17 +197,53 @@ d3.select("button").on("click", function(event) {
         .style("text-anchor", "middle")
         .text("Age group");
 
-svg.append("g").call(yAxis);
-svg.append("text")
-	.attr("transform", "rotate(-90)")
-	.attr("y", 0 - margin.left-20)
-	.attr("x",0 - (height / 2))
-	.attr("dy", "1em")
-	.style("text-anchor", "middle")
-	.text("Number of cases");
-	svg.append("g").call(make_y_gridlines);
+	svg.append("g").call(yAxis);
+	svg.append("text")
+		.attr("transform", "rotate(-90)")
+		.attr("y", 0 - margin.left-20)
+		.attr("x",0 - (height / 2))
+		.attr("dy", "1em")
+		.style("text-anchor", "middle")
+		.text("Number of cases");
+		svg.append("g").call(make_y_gridlines);
 
 	svg.call(tool_tip);
+
+	// ADD BAR 'OUTLINE' => GREY ZONE
+	svg
+	.append("g")
+	.attr("fill", barOutlineColor)
+	.selectAll("rect")
+	.data(data)
+	.join("rect")
+		.attr("id", function(d,i){ return "barOutline"+i})
+		.attr("x", (data, index) => x(index))
+		.attr("y", d => y(d.est))
+		.attr("height", d => y(0) - y(d.est))
+		.attr("width", x.bandwidth())
+		// .attr('title', (d) => d.value)
+		.attr("class", "rect")
+		.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
+		.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
+
+	// ADD BAR 'OUTLINE' => WITH BORDER
+	// svg
+	// .append("g")
+	// .attr("fill", "none")
+	// .selectAll("rect")
+	// .data(data)
+	// .join("rect")
+	// 	.attr("id", function(d,i){ return "barBorder"+i})
+	// 	.attr("x", (data, index) => x(index)+borderWidth/2)
+	// 	.attr("y", d => y(d.est + 1))
+	// 	.attr("height", d => y(0) - y(d.est - 2))
+	// 	.attr("width", x.bandwidth()-borderWidth)
+	// 	// .attr('title', (d) => d.value)
+	// 	.attr("class", "rect")
+	// 	.style("stroke", barColor)
+	// 	.style("stroke-width", borderWidth)
+	// 	.on("mouseover", function(d, i) { if(!animating) {handleMouseOver(d, i)}})
+	// 	.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
 
 	// ADD BARS
 	svg
@@ -204,7 +259,7 @@ svg.append("text")
 			.attr("width", x.bandwidth())
 			.attr('title', (d) => d.value)
 			.attr("class", "rect")
-			.on("mouseover", function(d, i) { console.log(animating);	if(!animating) {handleMouseOver(d, i)}})
+			.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
 			.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
 	
 	// ADD ESTIMATE LINES
@@ -308,12 +363,12 @@ function brushmoveY() {
 	
 	if (initialized) {
 		for (var i=0; i<data.length; i++) {
-			if (data[i].name == d.data()[0].name)
+			if (data[i].name == d.data()[0].name) {
+				d.datum().est= parseInt(d0[0]); // Change the value of the original data
 				handleMouseOverEst(d.data()[0], i);
+			}
 		}
 	}
-	
-	d.datum().est= parseInt(d0[0]); // Change the value of the original data
 }
 
 function startMoveY() {
@@ -329,17 +384,30 @@ function startMoveY() {
 }
 
 function endMoveY() {
-	animating = false;
+	animating = false;	
 
 	var d = d3.select(this).select('.selection');
 	if (initialized) {
 		for (var i=0; i<data.length; i++) {
-			if (data[i].name == d.data()[0].name)
-				handleMouseOutEst(d.data()[0], i);
+			if (data[i].name == d.data()[0].name) {
+				if (!isMouseOnHandle(i, d3.mouse(this)))
+					handleMouseOutEst(d.data()[0], i);
+			}
 		}
 	}
+}
 
-	console.log(data);
+// Check if mouse if still over handle to keep focus on bar or not
+function isMouseOnHandle(i, mouseCoords) {
+	var node = d3.select("#handle"+i).node();
+	// console.log(node);
+	// console.log(mouseCoords[0] + " -> " + node.x.baseVal.value + " => " + (mouseCoords[0]-node.x.baseVal.value));
+	// console.log(mouseCoords[1] + " -> " + node.y.baseVal.value + " => " + (mouseCoords[1]-node.y.baseVal.value));
+	var xOK = (mouseCoords[0]-node.x.baseVal.value) > 0 && (mouseCoords[0]-node.x.baseVal.value) < node.width.baseVal.value;
+	var yOK = (mouseCoords[1]-node.y.baseVal.value) > 0 && (mouseCoords[1]-node.y.baseVal.value) < node.height.baseVal.value
+	// console.log(xOK + " - " + yOK);
+	return xOK && yOK;
+	// return false;
 }
 
 function handleMouseOverEst(d, i) {
@@ -399,7 +467,6 @@ function arrowHead(d, i) {
 // ADD INTERACTIVITY
 function handleMouseOver(d, i, est = false) {
 	if (est) {
-		console.log("OKE");
 		showEstimate = true;
 	}
 	tool_tip.show(d, document.getElementById("bar" + i));
@@ -407,6 +474,8 @@ function handleMouseOver(d, i, est = false) {
 	for(j=0;j<data.length;j++){
 		if (i != j) {
 			d3.select("#bar" + j).transition().style("fill", barHoverColor);
+			d3.select("#barOutline" + j).transition().style("fill", barOutlineColorHover);
+			d3.select("#barBorder" + j).transition().style("stroke", barHoverColor)
 			d3.select("#lineUp" + j).transition().style("stroke", colorUpHover);
 			d3.select("#lineDown" + j).transition().style("stroke", colorDownHover);
 			d3.select("#arrowUp" + j).transition().style("stroke", colorUpHover)
@@ -423,6 +492,8 @@ function handleMouseOut(d, i) {
 	for(j=0;j<data.length;j++){
 		if (i != j){
 			d3.select("#bar" + j).transition().style("fill", barColor);
+			d3.select("#barOutline" + j).transition().style("fill", barOutlineColor);
+			d3.select("#barBorder" + j).transition().style("stroke", barColor)
 			d3.select("#lineUp" + j).transition().style("stroke", colorUp);
 			d3.select("#lineDown" + j).transition().style("stroke", colorDown);
 			d3.select("#arrowUp" + j).transition().style("stroke", colorUp);
@@ -452,7 +523,7 @@ function animateBar(d, i) {
 			.attrTween('y', function (d, j) {
 				return function (t) {
 					var tooltipVal = d3.interpolate(d.est, d.value)(t);
-					animateTooltip(d, i, tooltipVal);
+					animateTooltip(i, tooltipVal);
 
 					var ip_value = d3.interpolate(y(d.est), y(d.value))(t);
 					var diff = Math.abs(ip_value - y(d.est));
@@ -474,7 +545,7 @@ function showArrowHead(i){
 	d3.select("#arrowHeadFillUp" + i).transition("transition").style("visibility", "visible");
 }
 
-function animateTooltip(d,i,ip_value) {
+function animateTooltip(i,ip_value) {
 	var temp = {name: "", value: Math.round(ip_value), est: 0};
 	tool_tip.show(temp, document.getElementById("bar" + i));
 }

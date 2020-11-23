@@ -26,7 +26,8 @@ body {
 	background: rgba(0, 0, 0, 1);
 	color: #fff;
 	border-radius: 4px;
-	font-size: 14px;
+  font-size: 14px;
+  pointer-events: none;
 }
 .d3-tip:after {
 	content: "";
@@ -37,7 +38,8 @@ body {
 	border-style: solid;
 	border-color: transparent black transparent transparent;
 	top: 9.5px;
-	left: -12px;
+  left: -12px;
+  pointer-events: none;
 }
 .feedback {
 	text-align: center;
@@ -54,6 +56,12 @@ body {
 	cursor: default;
 	pointer-events: all;
 }
+.brush {
+  pointer-events: all;
+}
+/* .handle--n:active {
+  cursor: ns-resize !important;
+} */
 
 
 /* EVERYTHING FOR THE BUTTON (https://bttn.surge.sh/) */
