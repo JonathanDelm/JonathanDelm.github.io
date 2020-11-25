@@ -177,6 +177,14 @@ initialized = true;
 
 /* ----- COMPARISONS ----- */
 d3.select("button").on("click", function(event) {
+	// SAVING THE USER ENTRIES WITH FIREBASE FIRESTORE
+	// https://www.youtube.com/watch?v=4d-gIPGzmK4&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB
+	db.collection('estimates_us1').add({
+		time: new Date(),
+		estimates: data,
+	});
+
+
 	document.getElementById("button").style.display="none";
 
 	// DELETE ESTIMATE
@@ -564,7 +572,3 @@ function setFeedback(d) {
 		}
 	}	
 }
-
-// Draws everything
-// svg.node();
-		

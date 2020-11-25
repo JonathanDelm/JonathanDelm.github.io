@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>D3.js Tutorial</title>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,6 +22,26 @@
   </div>
   <button id="button" class="bttn-minimal bttn-md bttn-primary">Show me how I did</button>
   <div id="feedback" class="feedback"></div>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDAJqbE_G2kGkNcw5f-7B1kddiSuc-rhoI",
+      authDomain: "jd-thesis-backend.firebaseapp.com",
+      databaseURL: "https://jd-thesis-backend.firebaseio.com",
+      projectId: "jd-thesis-backend",
+      storageBucket: "jd-thesis-backend.appspot.com",
+      messagingSenderId: "221213920009",
+      appId: "1:221213920009:web:4441f7d3a69f06f9c0e1d8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    db.settings({timestampsInSnapshots: true})
+  </script>
   <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
