@@ -324,6 +324,7 @@ d3.select("button").on("click", function(event) {
 		animating = false; 
 		tool_tip.hide();
 		document.getElementById("feedback").innerHTML = "Hover over the bars to study the results.";
+		document.getElementById("fullArticle").style.display="inline-block";
 	}, (animationDuration + waitDuration*2) * data.length + 100);
 	
 });
@@ -561,7 +562,7 @@ function animateTooltip(i,ip_value) {
 // TEXT BASED FEEDBACK
 function setFeedback(d) {
 	if (d == "" || animating) {
-		document.getElementById("feedback").innerHTML = "";
+		document.getElementById("feedback").innerHTML = "<b></b>";
 	} else {
 		var diff = Math.abs(d.value - d.est);
 		var percent = Math.round(((diff / d.value)*100));
