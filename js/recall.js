@@ -1,73 +1,68 @@
-// Tutorial: https://youtu.be/BDpBAFvdjYo
-const data = [
-  { name: "0-19", value: 63311, est: 10000 },
-  { name: "20-29", value: 89634, est: 10000 },
-  { name: "30-39", value: 82440, est: 10000 },
-  { name: "40-49", value: 82030, est: 10000 },
-  { name: "50-59", value: 76691, est: 10000 },
-  { name: "60-69", value: 43658, est: 10000 },
-	{ name: "70-79", value: 29677, est: 10000 },
-	{ name: "80+", value: 44883, est: 10000 }
+// Set the correct value of the folding score in the html
+var foldingScore = document.getElementById("foldingScore");
+var obj = JSON.parse(sessionStorage.getItem('obj'));
+if (obj != null) {
+	foldingScore.innerHTML = obj.data.metaData.distractorScore;
+}
+
+// DATA VARS
+const initialEstValue = 20000;
+var data = [
+  { name: "10-19", value: 113750, est: initialEstValue },
+  { name: "20-29", value: 161355, est: initialEstValue },
+  { name: "30-39", value: 154483, est: initialEstValue },
+  { name: "40-49", value: 153037, est: initialEstValue },
+  { name: "50-59", value: 142577, est: initialEstValue },
+  { name: "60-69", value: 83979, est: 83979 },
+	{ name: "70-79", value: 55547, est: initialEstValue },
+	{ name: "80+", value: 81058, est: initialEstValue }
 ];
+var metaData = {
+	timeSpentRecalling: 0
+}
 
-// ORIGINAL RED GREEN
-// const barColor = "#3F3F3F";
-// const barHoverColor = '#b3b3b3';
-// const colorUp = "#53c88d";
-// const colorUpHover = "#CBEEDC";
-// const colorUpText = "#42A070";
-// const colorDown = "#ed403c";
-// const colorDownHover = "#F9C5C4";
-// const colorDownText = "#BD3330";
+// VARS FOR CALCULATING METADATA
+var lastHoveredBar = -1;
+const startTimeRecall = new Date();
+var startTimeComp;
 
-// BLUE ORANGE
-// const barColor = "#5B5B5B";
-// const barHoverColor = '#b3b3b3';
-// const colorUp = "#FFA500";
-// const colorUpHover = "#ffe4b2";
-// const colorUpText = "#FFA500";
-// const colorDown = "#005AFF";
-// const colorDownHover = "#b2cdff";
-// const colorDownText = "#005AFF";
-
-// SOFTER RED & LIGHTER GREEN
+// COLORS
 const barColor = "#3F3F3F";
 const barHoverColor = '#b3b3b3';
-const colorUp = "#6fdc8c";
-const colorUpHover = "#d3f4dc";
-const colorUpText = "#42A070";
-const colorDown = "#f0695f";
-const colorDownHover = "#fbdddb";
-const colorDownText = "#BD3330";
+const colorUp = "#FFA500";
+const colorUpHover = "#ffe4b2";
+const colorUpText = "#FFA500";
+const colorDown = "#005AFF";
+const colorDownHover = "#b2cdff";
+const colorDownText = "#005AFF";
 const barOutlineColor = "rgba(63,63,63,0.1)";
 const barOutlineColorHover = "rgba(63,63,63,0.03)";
 
-const borderWidth = 1.5;
-
+// VARS NEEDED FOR ANIMATION
 const animationDuration = 2000;
 const waitDuration = 1000;
 var animating = true;
 var initialized = false;
 var showEstimate = false;
 
+// VARS FOR DRAWING THE BAR CHART
 var svg = null;
-const width = 900;
-const height = 460;
+const width = 1000;
+const height = 500;
 const margin = { top: 50, bottom: 60, left: 50, right: 50 };
 
 const x = d3.scaleBand()
 	.domain(d3.range(data.length))
   .range([margin.left, width - margin.right])
 	.padding(0.3)
-	
+
 const axisNumberFormat = {
 	'decimal': ',',
 	'thousands': ' ',
 	'grouping': [3],
 	'currency': ['', ''],
 };
-
-var numberFormat = this.d3.formatDefaultLocale(axisNumberFormat);
+this.d3.formatDefaultLocale(axisNumberFormat);
 	
 var maxYVal = parseInt(
 	d3.max(data, function (d) {
@@ -83,25 +78,26 @@ const y = d3.scaleLinear()
 var tool_tip_est = d3.tip()
 	.attr("class", "d3-tip")
 	.offset(function(d){ 
-		var y = 52 + (d.est.toString().length-1)*4.1;
+		var y = 54 + (d.est.toString().length-1)*4.1;
 		return [17.2,y];
 	})
   .html(
-		// function(d) { return new Intl.NumberFormat('fr-BE').format(d.est); }
-		function(d) { return d3.format(" ,")(d.est); }
+		function(d) {
+			return (d3.format(" ,")(d.est)); 
+		}
   );
 
 var tool_tip = d3.tip()
 	.attr("class", "d3-tip")
 	.offset(function(d){ 
-		var y = 52 + (d.value.toString().length-1)*4.1;
+		var y = 54 + (d.value.toString().length-1)*4.1;
 		return [17.2,y];
 	})
   .html(
 		function(d) {
 			if (showEstimate) {
 				showEstimate = false;
-				return d3.format(" ,")(d.est);
+				return d3.format(" ,")(d.est); 
 			} else {
 				showEstimate = false;
 				return d3.format(" ,")(d.value); 
@@ -110,6 +106,17 @@ var tool_tip = d3.tip()
 		}
 	);
 
+var tool_tip_hint = d3.tip()
+	.attr("class", "d3-tip-hint")
+	.offset(function(d){ 
+		var y = -15 + (d.est.toString().length-1)*4.1;
+		return [-20,y];
+	})
+  .html(
+		function(d) {
+			 return "Deze staaf werd gegeven als hint"; 
+		}
+  );
 	
 // DRAG FUNCTIONALITY (https://github.com/d3/d3-brush)
 var brushY = d3.brushY()
@@ -117,14 +124,18 @@ var brushY = d3.brushY()
   .extent(function (d, i) {
 			 return [[x(i), y(maxYVal + maxYVal/6)],
 			 				// Set minimal value
-							// [x(i) + x.bandwidth(), y(maxYVal/20)]];})
 							[x(i) + x.bandwidth(), y(1)]];})
 	.on("start", startMoveY)
 	.on("brush", brushmoveY)
 	.on("end", endMoveY)
 	.handleSize([20]);
 
+// Hide elements of the comparison page
+document.getElementById("buttonContinue").style.display="none";
+document.getElementById("continueMessage").style.display="none";
+document.getElementById("continueErrorMessage").style.display="none";
 
+// CREATING THE ACTUAL SVG
 svg = d3.select("#comparison-container")
 	.append("svg")
 	.attr("width", width - margin.left - margin.right)
@@ -133,6 +144,7 @@ svg = d3.select("#comparison-container")
 
 svg.append("g").call(make_y_gridlines);
 svg.call(tool_tip_est);
+svg.call(tool_tip_hint);
 
 svg
   .selectAll('.brush')
@@ -140,9 +152,16 @@ svg
   .enter()
     .append('g')
       .attr('class', 'brush')
+			.attr("id", function(d,i){ return "brush"+i})
 		.call(brushY)
-			// SET INITIAL HEIGHT
-			.call(brushY.move, function (d){return [d.est, 0].map(y);});
+		// SET INITIAL HEIGHT
+		.call(brushY.move, function (d, i){
+			if (i === 5) {
+				return [d.value, 0].map(y);
+			} else {
+				return [d.est, 0].map(y);
+			}
+		});
 
 d3.selectAll('.brush>.handle--s').remove();
 
@@ -161,7 +180,7 @@ svg.append("text")      // text label for the x axis
         .attr("x", height )
         .attr("y", height - 4 )
         .style("text-anchor", "middle")
-        .text("Age group");
+        .text("Leeftijdscategorie");
 
 svg.append("g").call(yAxis);
 svg.append("text")
@@ -170,166 +189,168 @@ svg.append("text")
 	.attr("x",0 - (height / 2))
 	.attr("dy", "1em")
 	.style("text-anchor", "middle")
-	.text("Number of cases");
+	.text("Aantal bevestigde besmettingen");
 
 initialized = true;
 
 
 /* ----- COMPARISONS ----- */
 d3.select("button").on("click", function(event) {
-	// SAVING THE USER ENTRIES WITH FIREBASE FIRESTORE
-	// https://www.youtube.com/watch?v=4d-gIPGzmK4&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB
-	db.collection('estimates_us1').add({
-		time: new Date(),
-		estimates: data,
-	});
+	// Save time spent on estimating
+	var elapsed = new Date() - startTimeRecall;
+	metaData.timeSpentRecalling = Math.round(elapsed/1000);
 
+	// Start tracking time for comparisson chart
+	startTimeComp = new Date();
 
-	document.getElementById("button").style.display="none";
+	// Only continue if they dragged all the bars at least once (all the est values are different from the initial value)
+	if (!allBarsDragged()){
+		document.getElementById("continueErrorMessage").style.display="block";
+	} else {
+		document.getElementById("button").style.display="none";
+		document.getElementById("textDiv").style.display="none";
+		document.getElementById("continueErrorMessage").style.display="none";
 
-	// DELETE ESTIMATE
-	svg.selectAll("*").remove();
-	d3.select("svg").remove();
+		document.getElementById("buttonContinue").style.display="block";
+		document.getElementById("continueMessage").style.display="block";
 
-	svg = d3.select("#comparison-container")
-		.append("svg")
-		// .attr("style","background-color:green")
-		.attr("width", width - margin.left - margin.right)
-		.attr("height", height - margin.top - margin.bottom)
-		.attr("viewBox", [0, 0, width, height]);
-
-	svg.append("g").call(xAxis);
-	svg.append("text")      // text label for the x axis
-        .attr("x", height )
-        .attr("y", height - 4 )
-        .style("text-anchor", "middle")
-        .text("Age group");
-
-	svg.append("g").call(yAxis);
-	svg.append("text")
-		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin.left-20)
-		.attr("x",0 - (height / 2))
-		.attr("dy", "1em")
-		.style("text-anchor", "middle")
-		.text("Number of cases");
-		svg.append("g").call(make_y_gridlines);
-
-	svg.call(tool_tip);
-
-	// ADD BAR 'OUTLINE' => GREY ZONE
-	svg
-	.append("g")
-	.attr("fill", barOutlineColor)
-	.selectAll("rect")
-	.data(data)
-	.join("rect")
-		.attr("id", function(d,i){ return "barOutline"+i})
-		.attr("x", (data, index) => x(index))
-		.attr("y", d => y(d.est))
-		.attr("height", d => y(0) - y(d.est))
-		.attr("width", x.bandwidth())
-		// .attr('title', (d) => d.value)
-		.attr("class", "rect")
-		.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
-		.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
-
-	// ADD BAR 'OUTLINE' => WITH BORDER
-	// svg
-	// .append("g")
-	// .attr("fill", "none")
-	// .selectAll("rect")
-	// .data(data)
-	// .join("rect")
-	// 	.attr("id", function(d,i){ return "barBorder"+i})
-	// 	.attr("x", (data, index) => x(index)+borderWidth/2)
-	// 	.attr("y", d => y(d.est + 1))
-	// 	.attr("height", d => y(0) - y(d.est - 2))
-	// 	.attr("width", x.bandwidth()-borderWidth)
-	// 	// .attr('title', (d) => d.value)
-	// 	.attr("class", "rect")
-	// 	.style("stroke", barColor)
-	// 	.style("stroke-width", borderWidth)
-	// 	.on("mouseover", function(d, i) { if(!animating) {handleMouseOver(d, i)}})
-	// 	.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
-
-	// ADD BARS
-	svg
+		// DELETE ESTIMATE
+		svg.selectAll("*").remove();
+		d3.select("svg").remove();
+	
+		svg = d3.select("#comparison-container")
+			.append("svg")
+			.attr("width", width - margin.left - margin.right)
+			.attr("height", height - margin.top - margin.bottom)
+			.attr("viewBox", [0, 0, width, height]);
+	
+		svg.append("g").call(xAxis);
+		svg.append("text")      // text label for the x axis
+					.attr("x", height )
+					.attr("y", height - 4 )
+					.style("text-anchor", "middle")
+					.text("Leeftijdscategorie");
+	
+		svg.append("g").call(yAxis);
+		svg.append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", 0 - margin.left-20)
+			.attr("x",0 - (height / 2))
+			.attr("dy", "1em")
+			.style("text-anchor", "middle")
+			.text("Aantal bevestigde besmettingen");
+			svg.append("g").call(make_y_gridlines);
+	
+		svg.call(tool_tip);
+		svg.call(tool_tip_hint);
+	
+		// ADD BAR 'OUTLINE' => GREY ZONE
+		svg
 		.append("g")
-		.attr("fill", barColor)
+		.attr("fill", barOutlineColor)
 		.selectAll("rect")
 		.data(data)
 		.join("rect")
-			.attr("id", function(d,i){ return "bar"+i})
+			.attr("id", function(d,i){ return "barOutline"+i})
 			.attr("x", (data, index) => x(index))
 			.attr("y", d => y(d.est))
 			.attr("height", d => y(0) - y(d.est))
 			.attr("width", x.bandwidth())
-			.attr('title', (d) => d.value)
 			.attr("class", "rect")
 			.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
 			.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
 	
-	// ADD ESTIMATE LINES
-	svg.append('g')
-		.selectAll('line')
-		.data(data)
-		.join("line")
-			.style("visibility", "hidden")
-			.style("stroke", (d) => upOrDownColor(d))
-			.style("stroke-width", 3)
-			.attr("x1", (data, index) => x(index))
-			.attr("y1", d => y(d.est))
-			.attr("x2", (data, index) => (x(index) + x.bandwidth()))
-			.attr("y2", d => y(d.est))
-			.attr("id", function(d,i){ 
-				if(d.value > d.est) {
-					return "lineUp"+i;
+		// ADD BARS
+		svg
+			.append("g")
+			.attr("fill", barColor)
+			.selectAll("rect")
+			.data(data)
+			.join("rect")
+				.attr("id", function(d,i){ return "bar"+i})
+				.attr("x", (data, index) => x(index))
+				.attr("y", d => y(d.est))
+				.attr("height", d => y(0) - y(d.est))
+				.attr("width", x.bandwidth())
+				.attr('title', (d) => d.value)
+				.attr("class", "rect")
+				.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
+				.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
+		
+		// ADD ESTIMATE LINES
+		svg.append('g')
+			.selectAll('line')
+			.data(data)
+			.join("line")
+				.style("visibility", "hidden")
+				.style("stroke", (d) => upOrDownColor(d))
+				.style("stroke-width", 3)
+				.attr("x1", (data, index) => x(index))
+				.attr("y1", d => y(d.est))
+				.attr("x2", (data, index) => (x(index) + x.bandwidth()))
+				.attr("y2", d => y(d.est))
+				.attr("id", function(d,i){ 
+					if(d.value > d.est) {
+						return "lineUp"+i;
+					} else {
+						return "lineDown"+i;
+					}
+				})
+				.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
+				.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
+	
+		// ADD ERROR ARROWS
+		svg.append('g')
+			.selectAll('line')
+			.data(data)
+			.join("line")
+				.style("visibility", "hidden")
+				.style("stroke", (d) => upOrDownColor(d))
+				.style("stroke-width", 3)
+				.attr("x1", (data, index) => (x(index) + x.bandwidth()/2))
+				.attr("y1", d => y(d.est))
+				.attr("x2", (data, index) => (x(index) + x.bandwidth()/2))
+				.attr("y2", d => y(d.est))
+				.attr("id", function(d,i){ 
+					if(d.value > d.est) {
+						return "arrowUp"+i;
+					} else {
+						return "arrowDown"+i;
+					}
+				})
+				.attr('marker-end',	(data, index) => arrowHead(data, index))
+				.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
+				.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
+	
+	
+		animating = true;
+		for (let i = 0; i < data.length; i++) {
+			if (i != 5) {
+				if (i > 5) {
+					extraTime = i - 1;
 				} else {
-					return "lineDown"+i;
+					extraTime = i;
 				}
-			})
-			.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
-			.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
-
-	// ADD ERROR ARROWS
-	svg.append('g')
-		.selectAll('line')
-		.data(data)
-		.join("line")
-			.style("visibility", "hidden")
-			.style("stroke", (d) => upOrDownColor(d))
-			.style("stroke-width", 3)
-			.attr("x1", (data, index) => (x(index) + x.bandwidth()/2))
-			.attr("y1", d => y(d.est))
-			.attr("x2", (data, index) => (x(index) + x.bandwidth()/2))
-			.attr("y2", d => y(d.est))
-			.attr("id", function(d,i){ 
-				if(d.value > d.est) {
-					return "arrowUp"+i;
-				} else {
-					return "arrowDown"+i;
-				}
-			})
-			.attr('marker-end',	(data, index) => arrowHead(data, index))
-			.on("mouseover", function(d, i) {	if(!animating) {handleMouseOver(d, i)}})
-			.on("mouseout", function(d, i) { if(!animating) {handleMouseOut(d,i)}});
-
-
-	animating = true;
-	for (let i = 0; i < data.length; i++) {
-		setTimeout(function(event) {animateBar(data[i],i)}, (animationDuration + waitDuration*2) * i);
+				setTimeout(function(event) {animateBar(data[i],i)}, (animationDuration + waitDuration*2) * extraTime);
+			}
+		}
+		setTimeout(function() {
+			animating = false;
+			tool_tip.hide();
+			document.getElementById("feedback").innerHTML = "";
+		}, (animationDuration + waitDuration*2) * (data.length - 1) + 100);	
 	}
-	setTimeout(function() {
-		animating = false; 
-		tool_tip.hide();
-		document.getElementById("feedback").innerHTML = "Hover over the bars to study the results.";
-		document.getElementById("fullArticle").style.display="inline-block";
-	}, (animationDuration + waitDuration*2) * data.length + 100);
-	
 });
-	
 
+function allBarsDragged() {
+	var result = true;
+	data.forEach(e => {
+		if (e.est == initialEstValue) {
+			result = false;
+		}
+	});
+	return result;
+}
 
 // ADD X-AXIS
 function xAxis(g) {
@@ -367,13 +388,19 @@ function upOrDownColor(d) {
 
 // ESTIMATION FUNCTIONS
 function brushmoveY() {
-	var d0 = d3.event.selection.map(y.invert);
-	var d = d3.select(this).select('.selection');
+	let newValue = d3.event.selection.map(y.invert)[0];
+	let d = d3.select(this).select('.selection');
+	let correctValue = d.data()[0].value;
+
+	// HACKY WAY TO MAKE SURE USERS CAN PICK THE EXACT NUMBER (ticks are 620)
+	if (Math.abs(newValue-correctValue) < 310) {
+		newValue = correctValue;
+	}
 	
 	if (initialized) {
 		for (var i=0; i<data.length; i++) {
 			if (data[i].name == d.data()[0].name) {
-				d.datum().est= parseInt(d0[0]); // Change the value of the original data
+				d.datum().est= parseInt(newValue); // Change the value of the original data
 				handleMouseOverEst(d.data()[0], i);
 			}
 		}
@@ -393,7 +420,7 @@ function startMoveY() {
 }
 
 function endMoveY() {
-	animating = false;	
+	animating = false;
 
 	var d = d3.select(this).select('.selection');
 	if (initialized) {
@@ -409,35 +436,37 @@ function endMoveY() {
 // Check if mouse if still over handle to keep focus on bar or not
 function isMouseOnHandle(i, mouseCoords) {
 	var node = d3.select("#handle"+i).node();
-	// console.log(node);
-	// console.log(mouseCoords[0] + " -> " + node.x.baseVal.value + " => " + (mouseCoords[0]-node.x.baseVal.value));
-	// console.log(mouseCoords[1] + " -> " + node.y.baseVal.value + " => " + (mouseCoords[1]-node.y.baseVal.value));
 	var xOK = (mouseCoords[0]-node.x.baseVal.value) > 0 && (mouseCoords[0]-node.x.baseVal.value) < node.width.baseVal.value;
 	var yOK = (mouseCoords[1]-node.y.baseVal.value) > 0 && (mouseCoords[1]-node.y.baseVal.value) < node.height.baseVal.value
-	// console.log(xOK + " - " + yOK);
 	return xOK && yOK;
-	// return false;
 }
 
 function handleMouseOverEst(d, i) {
+	if (i == 5) {
+		tool_tip_hint.show(data[i], document.getElementById("bar" + i));
+	}
+
 	tool_tip_est.show(data[i], document.getElementById("bar" + i));
-	for(j=0;j<data.length;j++){
+	for (j=0;j<data.length;j++) {
 		if (i != j) {
 			d3.select("#bar" + j).transition().style("fill", barHoverColor);
 		}
 	}
 }
 function handleMouseOutEst(d, i) {
+	if (i == 5) {
+		tool_tip_hint.hide(data[i], document.getElementById("bar" + i));
+	}
+
 	tool_tip_est.hide(data[i], document.getElementById("bar" + i));
 	for(j=0;j<data.length;j++){
-		if (i != j){
+		if (i != j) {
 			d3.select("#bar" + j).transition().style("fill", barColor);
 		}
 	}
 }
 
 // COMPARISON FUNCTIONS
-
 // ARROW HEADS (http://jsfiddle.net/igbatov/v0ekdzw1/)
 function arrowHead(d, i) {
 	svg.append("svg:defs").append("svg:marker")
@@ -475,11 +504,15 @@ function arrowHead(d, i) {
 
 // ADD INTERACTIVITY
 function handleMouseOver(d, i, est = false) {
+	if (i == 5) {
+		tool_tip_hint.show(data[i], document.getElementById("bar" + i));
+	}
+
 	if (est) {
 		showEstimate = true;
 	}
 	tool_tip.show(d, document.getElementById("bar" + i));
-	setFeedback(d);
+	setFeedback(d, i);
 	for(j=0;j<data.length;j++){
 		if (i != j) {
 			d3.select("#bar" + j).transition().style("fill", barHoverColor);
@@ -496,8 +529,12 @@ function handleMouseOver(d, i, est = false) {
 }
 
 function handleMouseOut(d, i) {
+	if (i == 5) {
+		tool_tip_hint.hide(data[i], document.getElementById("bar" + i));
+	}
+
 	tool_tip.hide(d, document.getElementById("bar" + i));
-	setFeedback("");
+	setFeedback("", i);
 	for(j=0;j<data.length;j++){
 		if (i != j){
 			d3.select("#bar" + j).transition().style("fill", barColor);
@@ -546,7 +583,7 @@ function animateBar(d, i) {
 		});
 
 	}, waitDuration);
-	setTimeout(function() {handleMouseOut(d, i);}, animationDuration + waitDuration*2 - 20);
+	setTimeout(function() {handleMouseOut(d, i);}, animationDuration + waitDuration*2 - 35);
 }
 
 function showArrowHead(i){
@@ -560,16 +597,40 @@ function animateTooltip(i,ip_value) {
 }
 
 // TEXT BASED FEEDBACK
-function setFeedback(d) {
-	if (d == "" || animating) {
+function setFeedback(d, i) {
+	if (d == "" || animating || i == 5) {
 		document.getElementById("feedback").innerHTML = "<b></b>";
 	} else {
 		var diff = Math.abs(d.value - d.est);
 		var percent = Math.round(((diff / d.value)*100));
 		if (d.est > d.value) {
-			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorDownText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> cases <span style='color: " + colorDownText + ";'><b> lower </b></span> than you estimated."  // (-" + percent + "%)";
+			document.getElementById("feedback").innerHTML = "De correcte waarde voor " + d.name + " was <span style='color: " + colorDownText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> besmettingen <span style='color: " + colorDownText + ";'><b> lager </b></span> dan jouw schatting."  // (-" + percent + "%)";
 		} else {
-			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorUpText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> cases <span style='color: " + colorUpText + ";'><b> higher </b></span> than you estimated."  // (+" + percent + "%)";
+			document.getElementById("feedback").innerHTML = "De correcte waarde voor " + d.name + " was <span style='color: " + colorUpText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> besmettingen <span style='color: " + colorUpText + ";'><b> hoger </b></span> dan jouw schatting."  // (+" + percent + "%)";
 		}
 	}	
 }
+
+// When they click the continue button we save the results in sessionStorage and redirect them to the folding game page
+document.getElementById("buttonContinue").onclick = function () {
+	var obj = JSON.parse(sessionStorage.getItem('obj'));
+	obj.data.metaData.timeSpentRecalling = metaData.timeSpentRecalling;
+
+	var recallDataObj = new Object();
+	data.forEach(d => {
+		recallDataObj[d.name] = d.est;
+	});
+	obj.data.recallData = recallDataObj;
+
+	var base64string = btoa(JSON.stringify(obj));
+
+	// GET LOGINID FROM SESSIONSTORAGE
+	var loginID = sessionStorage.getItem('loginID');
+
+	// var baseurl = "https://kuleuven.eu.qualtrics.com/jfe/preview/SV_9soycxBZiL135R4?Q_CHL=preview&Q_SurveyVersionID=current"
+	var baseurl = "https://kuleuven.eu.qualtrics.com/jfe/preview/SV_9soycxBZiL135R4?Q_CHL=preview&Q_SurveyVersionID=current"
+	var fullUrl = baseurl + '&LoginID=' + loginID + '&Q_EED=' + base64string;
+
+	window.location.href = fullUrl;
+};
+

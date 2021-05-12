@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thesis Jonathan Delmeiren</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/recall.css">
+</head>
+<body>
+  <!-- BANNER -->
+  <div id="LogoContainer">
+    <div id="Logo"></div>
+  </div>
+
+  <div class="container_div">
+    <div id="textDiv" class="textDiv">
+      <p>Time is up!</p>
+      <br>
+      <h4>Lees de volgende instructies aandachtig door.</h4>
+      <p>
+        Voor de <b>laatste opdracht</b> gaan we kijken hoeveel u zich nog herinnert van het staafdiagram van eerder in het experiment over de COVID-19 besmettingen in België per leeftijdsgroep tot en met 1 mei 2021. 
+      </p>
+      <p>
+        <u>Opdracht</u>: Schat de waarden van de staven door ze tot op de gewenste hoogte te slepen. (Dit doe je door te klikken op de bovenkant van elke staaf en die vervolgens te verslepen). De staaf van de 60-69 jarigen staat reeds op de correcte hoogte.
+      </p>
+      <p>
+        Omdat het herinneren van de gegevens zo natuurlijk mogelijk moet gebeuren, werd deze test niet eerder in het experiment vermeld. Probeer toch zo goed mogelijk te antwoorden, ook al bent u niet zeker. Gelieve geen externe hulpmiddelen te gebruiken.
+      </p>
+    </div>
+    <div id="comparison-container" />
+  </div>
+  <div id="feedback" class="feedback"></div>
+  <div id="continueMessage" class="continueMessage">Goed gedaan! Op de volgende pagina kan u de survey indienen.<br>(U behaalde trouwens <b><span id="foldingScore"></span>/10</b> op de digital paper folding test, proficiat!)</div>
+  <div id="continueErrorMessage" class="continueErrorMessage">Gelieve elke staaf van hoogte te veranderen vooraleer de resultaten te bekijken.</div>
+  <div id="buttonDiv">
+    <button id="button" class="button">Bekijk resultaten</button>
+    <button id="buttonContinue" class="button">Volgende</button>
+  </div>
+  
+  <script type="text/javascript" src="../js/recall.js"></script>
+</body>
+</html>

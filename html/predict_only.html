@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thesis Jonathan Delmeiren</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/predict_storytelling.css">
+</head>
+<body>
+  <!-- BANNER -->
+  <div id="LogoContainer">
+    <div id="Logo"></div>
+  </div>
+
+  <div class="container_div">
+    <div id="textDiv" class="textDiv">
+      <h4>Lees de volgende instructies aandachtig door.</h4>
+      <p>
+        Het staafdiagram onderaan de pagina stelt het <b>aantal bevestigde COVID-19 besmettingen in België</b> voor <b>per leeftijdsgroep tot en met 1 mei 2021</b>. Maar voorlopig staat enkel de staaf van de 60-69 jarigen reeds op de correcte hoogte.
+      </p>
+      <p>
+        <u>Opdracht</u>: Voorspel de waarden van de andere staven door ze tot op de gewenste hoogte te slepen. (Dit doet u door te klikken op de bovenkant van elke staaf en die vervolgens te verslepen). Gelieve hiervoor geen externe bronnen te gebruiken, we zijn enkel geïnteresseerd in uw schatting.
+      </p>
+      <p>
+        <i>Opgelet!</i>&nbsp; Deze cijfers gaan enkel over het aantal <b>bevestigde besmettingen</b> per leeftijdscategorie. Iemand die dus besmet was, maar nooit werd getest, behoort niet tot deze data. Terwijl iemand die positief testte, maar eigenlijk niet besmet was, wel tot deze data behoort.
+      </p>
+    </div>
+
+    <div id="comparison-container" />
+  </div>
+  <div id="feedback" class="feedback"></div>
+  <div id="continueErrorMessage" class="continueErrorMessage">Gelieve elke staaf van hoogte te veranderen vooraleer de resultaten te bekijken.</div>
+  <div id="continueMessage" class="textDiv">
+    <h4>Lees de volgende instructies aandachtig door.</h4>
+    <p>Op de grafiek kan u nu uw schatting vergelijken met de correcte waarden. De hoogte van elke staaf is de correcte hoogte en de gekleurde, horizontale lijnen zijn uw schattingen. De pijlen tonen aan of de correcte waarde hoger was dan uw schatting (oranje) of dat die lager was dan uw schatting (blauw).</p>
+    <p>
+      <u>Opdracht</u>: Bestudeer de resultaten tweemaal vooraleer verder te gaan. (Hover over de staven om de correcte waarden te bekijken.)
+    </p>
+  </div>
+  <div id="buttonDiv">
+    <button id="button" class="button">Bekijk resultaten</button>
+    <button id="buttonContinue" class="button">Volgende</button>
+  </div>
+  
+  <script type="text/javascript" src="../js/predict_only.js"></script>
+  <script type="text/javascript" src="../js/data_sending.js"></script>
+</body>
+</html>

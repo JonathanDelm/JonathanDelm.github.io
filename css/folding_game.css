@@ -1,0 +1,112 @@
+body {
+  font-family: 'Open Sans', 'Libre Franklin', sans-serif;
+  height: auto;
+  margin: 0;
+}
+
+/* BANNER */
+#LogoContainer {
+  background-image: url(../images/logo_banner.png);
+  height: 115px;
+  padding: 0 20px;
+}
+
+#Logo {
+  background: transparent url(../images/logo.png) no-repeat left center;
+  background-size: 211.68px 75px;
+  height: 115px;
+  max-width: none;
+}
+
+.textDiv {
+	text-align: center;
+	margin: 3em;
+
+  font-size: 18px;
+  color: #43464d;
+  padding: 20px;
+  line-height: 1.5em;
+}
+
+#timer {
+  padding: 10px;
+  margin-top: 40px;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.skipText {
+	text-align: center;
+  padding: 0 10px;
+
+  font-size: 18px;
+  color: #43464d;
+  line-height: 1.5em;
+}
+
+.container_div {
+  text-align: center;
+  margin: 3em;
+  margin-bottom: 100px;
+}
+
+.textDivUitleg {
+  text-align: left;
+
+  font-size: 18px;
+  color: #43464d;
+  padding: 20px;
+  line-height: 1.5em;
+
+  max-width: 770px;
+  margin: 0 auto;
+}
+
+#buttonDivFolding {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+.button {
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 8px 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  -webkit-appearance: none;
+  transition: background .3s;
+  background-color: #116e8a;
+  float: right;
+}
+
+#checkboxes {
+	margin-bottom: 20px;
+	position: relative;
+  display: flex;
+  justify-content: center;
+}
+.checkboxgroup {
+  display: inline-block;
+  text-align: center;
+}
+.checkboxgroup label {
+  display: block;
+}
+
+@media screen and (max-width: 1110px) {
+  #checkboxes {
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+  }
+}

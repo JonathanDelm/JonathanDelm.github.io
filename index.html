@@ -1,56 +1,17 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title>D3.js Tutorial</title>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <div class="container_div">
-    <div class="article">
-      <!-- <h2>Confirmed coronavirus cases in Belgium by age, as of November 11, 2020</h2>
-      <p>Estimate the correct values by dragging the bars below. <br> We'll give you a hint: the total number of cases was at that point over 520.000.</p> -->
-
-      <h1>Just how bad is COVID-19 for the older generations?</h1>
-      <p><b> COVID-19 virus infects people of all ages. However, evidence to date suggests that two groups of people are at a higher risk of getting severe COVID-19 disease. 
-        These are older people and those with underlying medical conditions. In this article we will focus on age and what the consequences are of contracting covid in different age groups.</b></p>
-      <p class="articleText">However, before we dive into the data, we would like to know what you think the data is going to look like. Try and guess the number of COVID-19 cases among the different age groups in Belgium as of November 11, 2020.</p>
-        <p>We'll give you a <u>hint</u>: the total number of cases was at that point just over 520.000 .</p>
-    </div>
-    <div id="comparison-container" />
-  </div>
-  <button id="button" class="bttn-minimal bttn-md bttn-primary">Show me how I did</button>
-  <div id="feedback" class="feedback"></div>
-  <div id="fullArticle">
-    <p>As you can see, the data ... <i>[imagine an article talking about the data more in depth]</i></p>
-  </div>
-
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyDAJqbE_G2kGkNcw5f-7B1kddiSuc-rhoI",
-      authDomain: "jd-thesis-backend.firebaseapp.com",
-      databaseURL: "https://jd-thesis-backend.firebaseio.com",
-      projectId: "jd-thesis-backend",
-      storageBucket: "jd-thesis-backend.appspot.com",
-      messagingSenderId: "221213920009",
-      appId: "1:221213920009:web:4441f7d3a69f06f9c0e1d8"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    db.settings({timestampsInSnapshots: true})
-  </script>
-  <script type="text/javascript" src="index.js"></script>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<title>Jonathan Delmeiren Survey</title>
+		<meta name="description" content="Ik ben Jonathan Delmeiren en deze user study is onderdeel van mijn masterproef voor het verkrijgen van een diploma Master in de Toegepaste Informatica. Met dit onderzoek probeer ik verschillende nieuwe manieren om data voor te stellen te evalueren. Hiervoor zal er data rond COVID-19 in België worden gebruikt.">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+		<link rel="stylesheet" href="">
+	</head>
+	<body>
+		<!-- <iframe src="https://kuleuven.eu.qualtrics.com/jfe/preview/SV_78MPDdS0twMbLTg?Q_CHL=preview&Q_SurveyVersionID=current" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0%;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe> -->
+		<iframe src="https://kuleuven.eu.qualtrics.com/jfe/preview/SV_78MPDdS0twMbLTg?Q_CHL=preview&Q_SurveyVersionID=current" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0%;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+		<script src="" async defer></script>
+	</body>
 </html>

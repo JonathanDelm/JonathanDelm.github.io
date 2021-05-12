@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D3.js Tutorial</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/folding_game.css">
+</head>
+<body>
+  <!-- BANNER -->
+  <div id="LogoContainer">
+    <div id="Logo"></div>
+  </div>
+
+	<div class="container_div	" id="container_div_uitleg">
+    <div id="textDivUitleg" class="textDivUitleg">
+      <h4>Lees de volgende instructies aandachtig door.</h4>
+      <p>
+        De volgende opdracht is een '<b>digital paper folding test</b>' waarmee we uw ruimtelijk inzicht zullen testen. Op de volgende pagina zal u <b>10 vragen</b> te zien krijgen waarvan u er zoveel mogelijk correct zal moeten beantwoorden binnen de <b>3 minuten</b>.
+      </p>
+      <p>
+        Het doel van deze opdracht is om te testen hoe u het vouwen en ontvouwen van een blad papier mentaal kan visualiseren. In elke vraag worden een aantal afbeeldingen getoond in chronologische volgorde van links naar rechts. Deze stellen voor hoe het blad papier wordt geplooid. Op de laatste afbeelding in de rij staat een kleine cirkel getekend om te tonen waar een gat werd gemaakt in het papier. Elk gat is gemaakt door de volledige dikte van het papier. De afbeeldingen bij de antwoorden tonen de mogelijke posities van de gaten indien het papier volledig ontvouwd zou worden. Het is uw taak om vervolgens de correcte afbeelding uit de antwoorden te selecteren. Hieronder ziet u een voorbeeldvraag met bijhorende antwoordmogelijkheden.
+      </p>
+			<img src="../images/foldingTestImages/ExampleQ.png" width="770px">
+      <p>
+				Het correcte antwoord hier is C. De afbeeldingen hieronder tonen hoe het papier werd geplooid en waarom C het correcte antwoord is.
+			</p>
+			<img src="../images/foldingTestImages/ExampleSolution.png" width="770px">
+			<p>
+				In elke vraag worden alle plooien getoond en zal het papier niet bewogen en/of gedraaid worden. Denk eraan dat het correcte antwoord de figuur is die de positie van de gaten toont als het papier volledig wordt ontvouwen.
+			</p>
+			<p>
+				Als u er klaar voor bent, klik dan op 'Volgende'. De tijd zal onmiddellijk beginnen aftellen en wanneer de 3 minuten voorbij zijn, zal u automatisch naar de volgende pagina overgaan.
+			</p>
+			<p>
+				Succes!
+			</p>
+    </div>
+		  <div id="buttonDivFolding">
+				<button id="buttonContinueFolding" class="button">Volgende</button>
+			</div>
+	</div>
+
+
+	<div class="textDiv" id="textDiv">
+		<u>Opdracht</u>: Los zoveel mogelijk puzzels correct op binnen de 3 minuten.
+		<div id="timer">03:00</div>
+	</div>
+	
+  <div class="container_div" id="container_div">
+		<!-- <div id="checkboxes">
+			<div>
+				<img src="../images/foldingTestImages/Q1.png" height="80" style="margin-bottom: 22px;">
+			</div>
+			<div width="480">
+				<div class="checkboxgroup">
+					<label for="Q1_A"><img src="../images/foldingTestImages/Q1_1.png" width="80"></label>
+					<input type="radio" name="Q1" value="A" id="Q1_A">
+				</div>
+				<div class="checkboxgroup">
+					<label for="Q1_B"><img src="../images/foldingTestImages/Q1_2.png" width="80"></label>
+					<input type="radio" name="Q1" value="B" id="Q1_B">
+				</div>
+				<div class="checkboxgroup">
+					<label for="Q1_C"><img src="../images/foldingTestImages/Q1_3.png" width="80"></label>
+					<input type="radio" name="Q1" value="C" id="Q1_C">
+				</div>
+				<div class="checkboxgroup">
+					<label for="Q1_D"><img src="../images/foldingTestImages/Q1_4.png" width="80"></label>
+					<input type="radio" name="Q1" value="D" id="Q1_D">
+				</div>
+				<div class="checkboxgroup">
+					<label for="Q1_E"><img src="../images/foldingTestImages/Q1_5.png" width="80"></label>
+					<input type="radio" name="Q1" value="E" id="Q1_E">
+				</div>
+				<div class="checkboxgroup">
+					<label for="Q1_F"><p class="skipText">Ik weet<br>het niet</p></label>
+					<input type="radio" name="Q1" value="F" id="Q1_F">
+				</div>
+			</div>
+		</div> -->
+  </div>
+
+  <script type="text/javascript" src="../js/folding_game.js"></script>
+</body>
+</html>
