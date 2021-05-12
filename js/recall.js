@@ -628,7 +628,7 @@ document.getElementById("buttonContinue").onclick = function () {
 	var loginID = sessionStorage.getItem('loginID');
 
 	// var baseurl = "https://kuleuven.eu.qualtrics.com/jfe/preview/SV_9soycxBZiL135R4?Q_CHL=preview&Q_SurveyVersionID=current"
-	var baseurl = "https://kuleuven.eu.qualtrics.com/jfe/preview/SV_9soycxBZiL135R4?Q_CHL=preview&Q_SurveyVersionID=current"
+	var baseurl = "https://kuleuven.eu.qualtrics.com/jfe/form/SV_9soycxBZiL135R4"
 	var fullUrl = baseurl + '&LoginID=' + loginID + '&Q_EED=' + base64string;
 
 	window.location.href = fullUrl;
