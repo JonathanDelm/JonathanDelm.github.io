@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Me Your Knowledge Visualisation</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="showMeYourKnowledgeVisualisation.css">
+</head>
+<body>
+
+  <div class="container_div">
+    <div id="textDiv" class="textDiv">
+      <p><u>How it works:</u>&nbsp; Predict the values of the bars by dragging the top of each bar to the desired height.</p>
+      <!-- <p>Voorspel de waarden van de andere staven door ze tot op de gewenste hoogte te slepen. (Dit doet u door te klikken op de bovenkant van elke staaf en die vervolgens te verslepen). Gelieve hiervoor geen externe bronnen te gebruiken, we zijn enkel geïnteresseerd in uw schatting.</p> -->
+    </div>
+    <div id="comparison-container" />
+  </div>
+  <div id="feedback" class="feedback"></div>
+  <div id="buttonDiv">
+    <button id="button" class="bttn-minimal bttn-md bttn-primary">Show me how I did</button>
+    <!-- <button id="buttonContinue" class="button">Volgende</button> -->
+  </div>
+  
+  <script type="text/javascript" src="showMeYourKnowledgeVisualisation.js"></script>
+</body>
+</html>
