@@ -1,0 +1,106 @@
+html {
+	height: 100%;
+}
+
+body {
+  display: flex;
+	flex-direction: row;
+	justify-content: left;
+	height: 100%;
+	margin: 0;
+}
+
+#formDiv {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* background-color: #e1f5fe50; */
+	padding: 2em;
+	border-right: 1px solid lightgray;
+	min-width: 300px;
+}
+
+.helperTextDiv {
+	display: flex;
+	flex-direction: column;
+}
+
+#rightSideDiv {
+	flex: 4;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* background-color: chartreuse; */
+	padding: 2em;
+}
+
+#iFrameDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;	
+}
+
+#iFrameID {
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	/* padding: 20px; */
+}
+
+.copyText {
+	width: auto;
+	word-break: break-all;
+}
+
+.mdc-button {
+	height: 48px !important; 
+}
+
+.outputDiv {
+	display: flex;
+	flex-direction: row;
+}
+
+.outputSubDiv {
+	display: flex;
+	flex-direction: column;
+	flex: 15;
+}
+
+#outputDivSpace {
+	flex: 1;
+}
+
+.outputSubHeader {
+	font-size: 34px !important;
+}
+
+.outputBtnDiv {
+	display: flex;
+	flex-direction: row;
+}
+
+#outputBtnSpace {
+	flex: 1;
+}
+
+.outputBtn {
+	flex-grow: 1;
+	flex: 25;
+}
+
+.rightSideHeaderPreview {
+	padding-bottom: 40px;
+}
+
+.rightSideHeaderOutput {
+	padding-bottom: 24px;
+}
+
+.outputSubHeader {
+	padding-bottom: 12px;
+}
+
+button {
+	font-size: 14px !important;
+}
