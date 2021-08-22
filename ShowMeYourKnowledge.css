@@ -1,23 +1,35 @@
+:root {
+	--mdc-theme-primary: #7e57ff;
+	--mdc-theme-secondary: #b9a3ff;
+}
+
 html {
 	height: 100%;
 }
 
 body {
-  display: flex;
-	flex-direction: row;
-	justify-content: left;
 	height: 100%;
 	margin: 0;
 }
 
+.content {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	height: Calc( 100% - 64px );
+}
+
+#inputDiv {
+	flex: 0 0 300px;
+	padding: 2em;
+	min-height: 800px;
+}
+
 #formDiv {
-	flex: 2;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* background-color: #e1f5fe50; */
-	padding: 2em;
-	border-right: 1px solid lightgray;
+	height: 100%;
 	min-width: 300px;
 }
 
@@ -26,13 +38,14 @@ body {
 	flex-direction: column;
 }
 
-#rightSideDiv {
-	flex: 4;
+#previewDiv {
+	flex: 8;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	/* background-color: chartreuse; */
+	justify-content: baseline;
+	background-color: #fafafa;
 	padding: 2em;
+	min-width: 942px;
 }
 
 #iFrameDiv {
@@ -41,66 +54,85 @@ body {
 	justify-content: space-evenly;	
 }
 
-#iFrameID {
-	border: 1px solid lightgray;
-	border-radius: 4px;
-	/* padding: 20px; */
-}
-
-.copyText {
-	width: auto;
-	word-break: break-all;
-}
-
 .mdc-button {
-	height: 48px !important; 
+	height: 48px; 
 }
 
-.outputDiv {
-	display: flex;
-	flex-direction: row;
-}
-
-.outputSubDiv {
+#outputContainer {
+	flex: 0 0 364px;
 	display: flex;
 	flex-direction: column;
-	flex: 15;
+	justify-content: space-between;
+	padding: 2em;
 }
 
-#outputDivSpace {
-	flex: 1;
-}
-
-.outputSubHeader {
-	font-size: 34px !important;
-}
-
-.outputBtnDiv {
+#outputDiv {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 
-#outputBtnSpace {
-	flex: 1;
-}
-
-.outputBtn {
-	flex-grow: 1;
-	flex: 25;
-}
-
-.rightSideHeaderPreview {
-	padding-bottom: 40px;
-}
-
-.rightSideHeaderOutput {
-	padding-bottom: 24px;
-}
-
-.outputSubHeader {
-	padding-bottom: 12px;
+#madeBy {
+	text-align: center;
+	font-weight: 300;
 }
 
 button {
-	font-size: 14px !important;
+	font-size: 14px;
+}
+
+.header {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 2.2em;
+	padding-bottom: 0.8em;
+}
+
+.outputSubHeader {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 24px;
+	padding-bottom: 0.8em;
+}
+
+.outputBtn {
+	margin-bottom: 1em;
+}
+
+#filler {
+	height: 1em;
+}
+
+
+/* TOPBAR */
+.mdc-top-app-bar {
+	background-color: #6545CC;
+	height: 72px;
+}
+
+.mdc-top-app-bar__title {
+	font-weight: 100 ;
+	font-size: 32px ;
+	font-style: italic;
+	height: 48px;
+	line-height: 48px;
+}
+
+.topbarBtnRight {
+	margin-right: 20px;
+	width: 145px;
+}
+
+.topbarBtn {
+	margin-right: 10px;
+	width: 145px;
+}
+
+.topbarBtnText {
+	color: white;
+}
+
+.mdc-top-app-bar__row {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px;
 }

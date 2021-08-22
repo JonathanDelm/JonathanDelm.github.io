@@ -1,177 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Show Me Your Knowledge Online Tool</title>
+  <title>Show Me Your Knowledge - Believe-Driven Bar Chart Generator</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="ShowMeYourKnowledge.css">
+		<link rel="icon" href="favicon.ico">
 
 		<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
+		
+		<link rel="stylesheet" href="ShowMeYourKnowledge.css">
 	</head>
 	<body class="mdc-typography">
-			
-			<form id="formDiv" onsubmit="event.preventDefault(); updateData()">
 
-				<span class="mdc-typography--headline2">Input your data</span>
-
-				<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-					<span class="mdc-notched-outline">
-						<span class="mdc-notched-outline__leading"></span>
-						<span class="mdc-notched-outline__notch">
-							<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-								X-axis label
-							</span>
-						</span>
-						<span class="mdc-notched-outline__trailing"></span>
-					</span>
-					<input id="xAxis" name="xAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Age group">
-				</label>
-
-				<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-					<span class="mdc-notched-outline">
-						<span class="mdc-notched-outline__leading"></span>
-						<span class="mdc-notched-outline__notch">
-							<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-								Y-axis label
-							</span>
-						</span>
-						<span class="mdc-notched-outline__trailing"></span>
-					</span>
-					<input id="yAxis" name="yAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Number of cases">
-				</label>
-
-				<div class="helperTextDiv">
-					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-						<span class="mdc-notched-outline">
-							<span class="mdc-notched-outline__leading"></span>
-							<span class="mdc-notched-outline__notch">
-								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									Input your data
-								</span>
-							</span>
-							<span class="mdc-notched-outline__trailing"></span>
-						</span>
-						<span class="mdc-text-field__resizer">
-							<textarea 
-								aria-controls="dataHelperId"
-								aria-describedby="dataHelperId" 
-								id="data" name="data" class="mdc-text-field__input" rows="8" cols="40" aria-label="Label" wrap="hard" aria-controls="my-helper-id"
-							aria-describedby="my-helper-id">0-19,113750&#13;20-29,161355&#13;30-39,154483&#13;40-49,153037&#13;50-59,142577&#13;60-69,83979&#13;70-97,55547&#13;80+,81058</textarea>
-						</span>
-					</label>
-					<div class="mdc-text-field-helper-line">
-						<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="dataHelperId" aria-hidden="true">Every line should contain 1 category with it's corresponding value seperated by a comma</div>
-					</div>
+		<header class="mdc-top-app-bar">
+			<div class="mdc-top-app-bar__row">
+				<div class="mdc-top-app-bar__title">Show Me Your Knowledge</div>
+				<div>
+					<button class="mdc-button mdc-button--unelevated topbarBtn" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<!-- <i class="material-icons mdc-button__icon topbarBtn" aria-hidden="true">info</i> -->
+						<span class="mdc-button__label topbarBtnText">About</span>
+					</button>
+					<button class="mdc-button mdc-button--unelevated topbarBtnRight" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<!-- <i class="material-icons mdc-button__icon topbarBtn" aria-hidden="true">help</i> -->
+						<span class="mdc-button__label topbarBtnText">help</span>
+					</button>
 				</div>
+			</div>
+		</header>
+		<main class="mdc-top-app-bar--fixed-adjust content">
+		
+			<div id="inputDiv" class="mdc-card">
+				<span class="header">Input</span>
+				<form id="formDiv" onsubmit="event.preventDefault(); updateData()">
 
-				<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-					<span class="mdc-notched-outline">
-						<span class="mdc-notched-outline__leading"></span>
-						<span class="mdc-notched-outline__notch">
-							<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-								Starting value
-							</span>
-						</span>
-						<span class="mdc-notched-outline__trailing"></span>
-					</span>
-					<input id="startingValue" name="startingValue" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="20000">
-				</label>
-
-				<div class="helperTextDiv">
 					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
 						<span class="mdc-notched-outline">
 							<span class="mdc-notched-outline__leading"></span>
 							<span class="mdc-notched-outline__notch">
 								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									Hint bar
+									X-axis label
 								</span>
 							</span>
 							<span class="mdc-notched-outline__trailing"></span>
 						</span>
-						<input 
-								aria-controls="hintHelperId"
-								aria-describedby="hintHelperId" 
-								id="hint" name="hint" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="6">
+						<input id="xAxis" name="xAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Age group">
 					</label>
-					<div class="mdc-text-field-helper-line">
-						<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="hintHelperId" aria-hidden="true">Give the number of the bar you want to provide as a hint (Leftmost bar is number 1)
-						</div>
-					</div>
-				</div>
 
-				<div class="helperTextDiv">
 					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
 						<span class="mdc-notched-outline">
 							<span class="mdc-notched-outline__leading"></span>
 							<span class="mdc-notched-outline__notch">
 								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									Units
+									Y-axis label
 								</span>
 							</span>
 							<span class="mdc-notched-outline__trailing"></span>
 						</span>
-						<input aria-controls="unitsHelperId"
-							aria-describedby="unitsHelperId" 
-							id="units" name="units" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="cases">
+						<input id="yAxis" name="yAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Number of cases">
 					</label>
-					<div class="mdc-text-field-helper-line">
-						<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="unitsHelperId" aria-hidden="true">Used for textual feedback when hovering
+
+					<div class="helperTextDiv">
+						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
+							<span class="mdc-notched-outline">
+								<span class="mdc-notched-outline__leading"></span>
+								<span class="mdc-notched-outline__notch">
+									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
+										Input your data
+									</span>
+								</span>
+								<span class="mdc-notched-outline__trailing"></span>
+							</span>
+							<span class="mdc-text-field__resizer">
+								<textarea 
+									aria-controls="dataHelperId"
+									aria-describedby="dataHelperId" 
+									id="data" name="data" class="mdc-text-field__input" rows="8" cols="40" aria-label="Label" wrap="hard" aria-controls="my-helper-id"
+								aria-describedby="my-helper-id">0-19,113750&#13;20-29,161355&#13;30-39,154483&#13;40-49,153037&#13;50-59,142577&#13;60-69,83979&#13;70-97,55547&#13;80+,81058</textarea>
+							</span>
+						</label>
+						<div class="mdc-text-field-helper-line">
+							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="dataHelperId" aria-hidden="true">Every line should contain 1 category with it's corresponding value seperated by a comma</div>
 						</div>
 					</div>
+
+					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
+						<span class="mdc-notched-outline">
+							<span class="mdc-notched-outline__leading"></span>
+							<span class="mdc-notched-outline__notch">
+								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
+									Starting value
+								</span>
+							</span>
+							<span class="mdc-notched-outline__trailing"></span>
+						</span>
+						<input id="startingValue" name="startingValue" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="20000">
+					</label>
+
+					<div class="helperTextDiv">
+						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
+							<span class="mdc-notched-outline">
+								<span class="mdc-notched-outline__leading"></span>
+								<span class="mdc-notched-outline__notch">
+									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
+										Hint bar
+									</span>
+								</span>
+								<span class="mdc-notched-outline__trailing"></span>
+							</span>
+							<input 
+									aria-controls="hintHelperId"
+									aria-describedby="hintHelperId" 
+									id="hint" name="hint" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="6">
+						</label>
+						<div class="mdc-text-field-helper-line">
+							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="hintHelperId" aria-hidden="true">Give the number of the bar you want to provide as a hint (the leftmost bar is number 1)
+							</div>
+						</div>
+					</div>
+
+					<div class="helperTextDiv">
+						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
+							<span class="mdc-notched-outline">
+								<span class="mdc-notched-outline__leading"></span>
+								<span class="mdc-notched-outline__notch">
+									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
+										Units
+									</span>
+								</span>
+								<span class="mdc-notched-outline__trailing"></span>
+							</span>
+							<input aria-controls="unitsHelperId"
+								aria-describedby="unitsHelperId" 
+								id="units" name="units" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="cases">
+						</label>
+						<div class="mdc-text-field-helper-line">
+							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="unitsHelperId" aria-hidden="true">Used for textual feedback when hovering
+							</div>
+						</div>
+					</div>
+
+					<button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Update</span>
+					</button>
+					
+				</form>
+			</div>
+
+
+			<div id="previewDiv">
+				<div class="header">Preview</div>
+					<div id="iFrameDiv">
+						<span></span>
+						<iframe id='iFrameID' class="mdc-card" style="width:940px; height:507px;" frameborder=0></iframe>
+						<span></span>
+					</div>
+			</div>
+
+			<div id="outputContainer" class="mdc-card">
+				<div id="outputDiv">
+					<div class="header">Ouput</div>
+					<span class="outputSubHeader">View and share it online</span>
+					<button class="mdc-button mdc-button--raised outputBtn" onclick="goToSite();" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Go to personal website</span>
+					</button>
+					<button class="mdc-button mdc-button--raised outputBtn" onclick="copyURL();" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Copy personal url</span>
+					</button>
+					<span id='filler'></span>
+					<span class="outputSubHeader">Embed it into your own site</span>
+					<button class="mdc-button mdc-button--raised outputBtn" onclick="copyIFrameCode();" data-mdc-auto-init="MDCRipple">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Copy personal iFrame code</span>
+					</button>
 				</div>
 
-				<button class="mdc-button mdc-button--raised">
-					<span class="mdc-button__label">Update</span>
-				</button>
-				
-			</form>
-
-		<div id="rightSideDiv">
-			<div class="previewDivWithHeader">
-				<div class="mdc-typography--headline2 rightSideHeaderPreview">Preview</div>
-
-				<div id="iFrameDiv">
-					<span></span>
-					<iframe id='iFrameID'  style="width:940px; height:507px;" frameborder=0></iframe>
-					<span></span>
+				<div id="madeBy">
+					Made by <a href="https://linktr.ee/jonathandelmeiren" target="_blank">Jonathan Delmeiren</a>
 				</div>
 			</div>
-			
-			<div class="outputDivWithHeader">
-				<div class="mdc-typography--headline2 rightSideHeaderOutput">Ouput</div>
-				
-				<div class="outputDiv">
-					<div class="outputSubDiv">
-						<span class="mdc-typography--headline2 outputSubHeader">View & share online</span>
 
-						<div class="outputBtnDiv">
-							<button class="mdc-button mdc-button--raised outputBtn" onclick="goToSite();">
-								<span class="mdc-button__label">Go to site</span>
-							</button>
-							<span id="outputBtnSpace"></span>
-							<button class="mdc-button mdc-button--raised outputBtn" onclick="copyURL();">
-								<span class="mdc-button__label">Copy url</span>
-							</button>
-						</div>
+		</main>
 
-					</div>
-					<span id="outputDivSpace"></span>
-					<div class="outputSubDiv">
-						<span class="mdc-typography--headline2 outputSubHeader">Embed into your own site</span>
-
-						<div class="outputBtnDiv">
-							<button class="mdc-button mdc-button--raised outputBtn" onclick="copyIFrameCode();">
-								<span class="mdc-button__label">Copy iFrame code</span>
-							</button>
-						</div>
-					</div>
+		<aside class="mdc-snackbar">
+			<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+				<div class="mdc-snackbar__label" aria-atomic="false">
+					Link copied!
 				</div>
+				<button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
 			</div>
-
-		</div>
+		</aside>
 
 		<script type="text/javascript">
 			window.mdc.autoInit();
@@ -233,12 +258,17 @@
 				window.open(finalURL);
 			}
 
+			var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
 			function copyURL() {
 				navigator.clipboard.writeText(finalURL);
+				snackbar.labelText = "Personal URL copied to clipboard!";
+				snackbar.open();
 			}
 
 			function copyIFrameCode() {
 				navigator.clipboard.writeText(finalIFrameCode);
+				snackbar.labelText = "iFrame code copied to clipboard!";
+				snackbar.open();
 			}
 		</script>
 	</body>
