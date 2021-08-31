@@ -1,42 +1,41 @@
 body {
-  font-family: 'Open Sans', 'Libre Franklin', sans-serif;
-  height: auto;
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+  font-family: 'Noticia Text', serif;
 }
 
 .container_div {
-  text-align: center;
-  
-  width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3em 0em;
 }
 
 .article {
-  width: 620px;
+  width: 816px;
   text-align: left;
   display: inline-block;
+	margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.article h1 {
+  font-size: 44px;
+  font-weight: 700;
 }
 
 .articleText {
   padding-top: 20px;
 }
 
-#fullArticle {
-  padding-top: 35px;
-  width: 620px;
-  text-align: left;
-  display: none;
-}
-
 .feedback {
 	text-align: center;
   margin-bottom: 25px;
   height: 19.2px;
+	width: 620px;
 }
 
 #comparison-container {
-  padding-bottom: 0px;
+  padding-bottom: 20px;
 }
 
 .grid line {
@@ -47,16 +46,6 @@ body {
 .grid path {
 	stroke-width: 0;
 }
-
-#continueErrorMessage {
-  color: #ff0033;
-  font-weight: bold; 
-}
-
-#continueMessage {
-  text-align: left;
-}
-
 /* http://bl.ocks.org/davegotz/bd54b56723c154d25eedde6504d30ad7 */
 .d3-tip {
 	line-height: 1;
@@ -79,31 +68,6 @@ body {
   left: -12px;
   pointer-events: none;
 }
-
-.d3-tip-hint {
-	line-height: 1;
-	padding: 9px;
-	background: rgba(0, 0, 0, 1);
-  /* background:red; */
-	color: #fff;
-	border-radius: 4px;
-  font-size: 14px;
-  pointer-events: none;
-}
-/* Creates a small triangle extender for the tooltip */
-.d3-tip-hint:after {
-  content: "";
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-width: 6px;
-	border-style: solid;
-	border-color: black transparent transparent transparent;
-	top: 31px;
-  left: 93px;
-  pointer-events: none;
-}
-
 /* DRAGGABLE FUCTIONALITY */
 .overlay, .handle--s {
 	pointer-events: none;
@@ -118,26 +82,9 @@ body {
 .brush {
   pointer-events: all;
 }
-
-#buttonDiv {
-  margin: 0 auto;
-}
-
-.textDiv {
-  text-align: center;
-
-  font-size: 18px;
-  color: #43464d;
-  /* padding: 20px; */
-  line-height: 1.5em;
-
-  /* max-width: 770px; */
-  margin: 0 auto;
-}
-
-p {
-  margin: 0;
-}
+/* .handle--n:active {
+  cursor: ns-resize !important;
+} */
 
 
 /* EVERYTHING FOR THE BUTTON (https://bttn.surge.sh/) */

@@ -1,274 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Show Me Your Knowledge - Believe-Driven Bar Chart Generator</title>
+  <title>Show Me Your Knowledge</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" href="favicon.ico">
+		<link rel="icon" href="assets/favicon.ico">
 
 		<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
-		
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
 		<link rel="stylesheet" href="ShowMeYourKnowledge.css">
 	</head>
 	<body class="mdc-typography">
 
-		<header class="mdc-top-app-bar">
-			<div class="mdc-top-app-bar__row">
-				<div class="mdc-top-app-bar__title">Show Me Your Knowledge</div>
-				<div>
-					<button class="mdc-button mdc-button--unelevated topbarBtn" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<!-- <i class="material-icons mdc-button__icon topbarBtn" aria-hidden="true">info</i> -->
-						<span class="mdc-button__label topbarBtnText">About</span>
-					</button>
-					<button class="mdc-button mdc-button--unelevated topbarBtnRight" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<!-- <i class="material-icons mdc-button__icon topbarBtn" aria-hidden="true">help</i> -->
-						<span class="mdc-button__label topbarBtnText">help</span>
-					</button>
+			<div class="titleDiv">
+				<div class="titleLeft">
+					<div class="titleText">
+						<h1 class="mdc-typography--headline1 title">Show Me Your Knowledge</h1>
+						<h2 class="mdc-typography--headline2 titleH2">Show Me Your Knowledge</h2>
+					</div>
+					<div class="titleButtons">
+						<button class="mdc-button mdc-button--unelevated titleBtnTool"
+								onclick="window.open('https://jonathandelm.github.io/ShowMeYourKnowledge/tool', target='_self')"
+								data-mdc-auto-init="MDCRipple">
+							<span class="mdc-button__ripple"></span>
+							<span class="mdc-button__label">Try the tool</span>
+						</button>
+						<button class="mdc-button mdc-button--outlined titleBtnExample" 
+						onclick="window.open('https://jonathandelm.github.io/ShowMeYourKnowledge/example', target='_blank')"
+								data-mdc-auto-init="MDCRipple">
+							<span class="mdc-button__ripple"></span>
+							<span class="mdc-button__label">View an example</span>
+						</button>
+					</div>
+				</div>
+				<div class="titleImgDiv">
+					<img class="titleImg" src="assets/title_img.png">
 				</div>
 			</div>
-		</header>
-		<main class="mdc-top-app-bar--fixed-adjust content">
-		
-			<div id="inputDiv" class="mdc-card">
-				<span class="header">Input</span>
-				<form id="formDiv" onsubmit="event.preventDefault(); updateData()">
 
-					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-						<span class="mdc-notched-outline">
-							<span class="mdc-notched-outline__leading"></span>
-							<span class="mdc-notched-outline__notch">
-								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									X-axis label
-								</span>
-							</span>
-							<span class="mdc-notched-outline__trailing"></span>
-						</span>
-						<input id="xAxis" name="xAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Age group">
-					</label>
+			<div class="sellingPointsDiv">
+				<div class="sellingPointsCardsDiv">
+					<div class="card downCard">
+						<h2>Engage your readers</h2>
+						<p>Let users <b>predict</b> the data in your bar charts by dragging the top of each bars to their desired height.</p>
+					</div>
+					<div class="card">
+						<h2>Keep them engaged</h2>
+						<p>Our visualisation uses <b>animations</b> to show the results to the user. This increases their attention and makes them less likely to click away.</p>
+					</div>
+					<div class="card downCard">
+						<h2>Make your data memorable</h2>
+						<p>Research has shown that these techniques increase the recall of your data up to <b>30%</b>.</p>
+					</div>
+				</div>
+				<button class="mdc-button mdc-button--unelevated sellingPointExampleBtn" 
+				onclick="window.open('https://jonathandelm.github.io/ShowMeYourKnowledge/example', target='_blank')"
+						data-mdc-auto-init="MDCRipple">
+					<span class="mdc-button__ripple"></span>
+					<span class="mdc-button__label">View an example</span>
+				</button>
+			</div>			
 
-					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-						<span class="mdc-notched-outline">
-							<span class="mdc-notched-outline__leading"></span>
-							<span class="mdc-notched-outline__notch">
-								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									Y-axis label
-								</span>
-							</span>
-							<span class="mdc-notched-outline__trailing"></span>
-						</span>
-						<input id="yAxis" name="yAxis" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="Number of cases">
-					</label>
-
-					<div class="helperTextDiv">
-						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-							<span class="mdc-notched-outline">
-								<span class="mdc-notched-outline__leading"></span>
-								<span class="mdc-notched-outline__notch">
-									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-										Input your data
-									</span>
-								</span>
-								<span class="mdc-notched-outline__trailing"></span>
-							</span>
-							<span class="mdc-text-field__resizer">
-								<textarea 
-									aria-controls="dataHelperId"
-									aria-describedby="dataHelperId" 
-									id="data" name="data" class="mdc-text-field__input" rows="8" cols="40" aria-label="Label" wrap="hard" aria-controls="my-helper-id"
-								aria-describedby="my-helper-id">0-19,113750&#13;20-29,161355&#13;30-39,154483&#13;40-49,153037&#13;50-59,142577&#13;60-69,83979&#13;70-97,55547&#13;80+,81058</textarea>
-							</span>
-						</label>
-						<div class="mdc-text-field-helper-line">
-							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="dataHelperId" aria-hidden="true">Every line should contain 1 category with it's corresponding value seperated by a comma</div>
+			<div class="toolDiv">
+				<div class="toolImgDiv">
+					<img class="toolImg" src="assets/tool_img.png">
+				</div>
+				<div class="toolRight">
+					<div class="toolHeaderDiv">
+						<h2 class="mdc-typography--headline2 toolHeader">Creating your own visualisation is simple</h2>
+					</div>
+					<div class="toolItemsContainer">
+						<div class="toolItemDiv">
+							<div class="number"><span>1</span></div>
+							<p>Input your data into the tool</p>
+						</div>
+						<div class="toolItemDiv">
+							<div class="number"><span>2</span></div>
+							<p>Preview how the visualisation will look</p>
+						</div>
+						<div class="toolItemDiv">
+							<div class="number"><span>3</span></div>
+							<p>Share a link to your visualisation or embed it directly into your own site using iFrame</p>
 						</div>
 					</div>
+					<div class="toolBtnDiv">
+						<button class="mdc-button mdc-button--unelevated toolBtn" 
+						onclick="window.open('https://jonathandelm.github.io/ShowMeYourKnowledge/tool', target='_self')"
+								data-mdc-auto-init="MDCRipple">
+							<span class="mdc-button__ripple"></span>
+							<span class="mdc-button__label">Try the tool</span>
+						</button>
+					</div>
+				</div>
+			</div>
 
-					<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-						<span class="mdc-notched-outline">
-							<span class="mdc-notched-outline__leading"></span>
-							<span class="mdc-notched-outline__notch">
-								<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-									Starting value
-								</span>
-							</span>
-							<span class="mdc-notched-outline__trailing"></span>
-						</span>
-						<input id="startingValue" name="startingValue" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="20000">
-					</label>
+			<div class="researchDiv">
+				<div class="researchContentDiv">
+					<h2 class="mdc-typography--headline2">Backed by research</h2>
+					<p>This believe-driven bar chart was designed, developed and evaluated in the master's thesis: 
+						<i>'Show Me Your Knowledge: Improving Data Recall by Eliciting One’s Prior Knowledge and Comparing it with the Correct Data using Storytelling Techniques'</i>&nbsp; by Jonathan Delmeiren at KU Leuven. 
+						<br><br>It was concluded that data recall accuracy significantly improved when participants predicted the data and compared their estimates to the actual data. 
+						Compared to a static visualisation, this improvement was between 25 and 30%.
+					</p>
+					<div class="researchBtnDiv">
+						<button class="mdc-button mdc-button--unelevated sellingPointExampleBtn" 
+								onclick="window.open('https://jonathandelm.github.io/ShowMeYourKnowledge/thesis', target='_blank')"
+								data-mdc-auto-init="MDCRipple">
+							<span class="mdc-button__ripple"></span>
+							<span class="mdc-button__label">Read the full thesis</span>
+						</button>
+					</div>
+				</div>
+				<div class="researchImgContainer">
+					<img class="researchImg researchImg1" src="assets/thesis1.png">
+					<img class="researchImg researchImg2" src="assets/thesis2.png">
+					<img class="researchImg researchImg3" src="assets/thesis3.png">
+				</div>
+			</div>
 
-					<div class="helperTextDiv">
-						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-							<span class="mdc-notched-outline">
-								<span class="mdc-notched-outline__leading"></span>
-								<span class="mdc-notched-outline__notch">
-									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-										Hint bar
-									</span>
-								</span>
-								<span class="mdc-notched-outline__trailing"></span>
-							</span>
-							<input 
-									aria-controls="hintHelperId"
-									aria-describedby="hintHelperId" 
-									id="hint" name="hint" type="number" class="mdc-text-field__input" aria-labelledby="my-label-id" value="6">
-						</label>
-						<div class="mdc-text-field-helper-line">
-							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="hintHelperId" aria-hidden="true">Give the number of the bar you want to provide as a hint (the leftmost bar is number 1)
-							</div>
+			<div class="footerDiv">
+				<div class="footerContentDiv">
+					<h2 class="mdc-typography--headline2">Get in touch</h2>
+
+					<form class="footerForm" action="https://formspree.io/f/xoqypgdj" method="POST">
+						<div class="nameAndEmailDiv">
+							<label class="mdc-text-field mdc-text-field--filled nameInput" data-mdc-auto-init="MDCTextField">
+								<span class="mdc-text-field__ripple"></span>
+								<span class="mdc-floating-label" id="nameLabel">Your name</span>
+								<input class="mdc-text-field__input" type="text" aria-labelledby="nameLabel" name="name" required>
+								<span class="mdc-line-ripple"></span>
+							</label>
+
+							<label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+								<span class="mdc-text-field__ripple"></span>
+								<span class="mdc-floating-label" id="emailLabel">Your email</span>
+								<input class="mdc-text-field__input" type="email" aria-labelledby="emailLabel" name="email" required>
+								<span class="mdc-line-ripple"></span>
+							</label>
 						</div>
-					</div>
-
-					<div class="helperTextDiv">
-						<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating" data-mdc-auto-init="MDCTextField">
-							<span class="mdc-notched-outline">
-								<span class="mdc-notched-outline__leading"></span>
-								<span class="mdc-notched-outline__notch">
-									<span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
-										Units
-									</span>
-								</span>
-								<span class="mdc-notched-outline__trailing"></span>
-							</span>
-							<input aria-controls="unitsHelperId"
-								aria-describedby="unitsHelperId" 
-								id="units" name="units" type="text" class="mdc-text-field__input" aria-labelledby="my-label-id" value="cases">
+						<label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+							<span class="mdc-text-field__ripple"></span>
+							<span class="mdc-floating-label" id="messageLabel">Your message</span>
+							<input class="mdc-text-field__input" type="text" aria-labelledby="messageLabel" name="message" required>
+							<span class="mdc-line-ripple"></span>
 						</label>
-						<div class="mdc-text-field-helper-line">
-							<div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="unitsHelperId" aria-hidden="true">Used for textual feedback when hovering
-							</div>
+						<div class="formBtnDiv">
+							<button class="mdc-button mdc-button--unelevated formBtn" data-mdc-auto-init="MDCRipple">
+								<span class="mdc-button__ripple"></span>
+								<span class="mdc-button__label">Submit</span>
+							</button>
 						</div>
-					</div>
+					</form>
 
-					<button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Update</span>
-					</button>
-					
-				</form>
-			</div>
-
-
-			<div id="previewDiv">
-				<div class="header">Preview</div>
-					<div id="iFrameDiv">
-						<span></span>
-						<iframe id='iFrameID' class="mdc-card" style="width:940px; height:507px;" frameborder=0></iframe>
-						<span></span>
-					</div>
-			</div>
-
-			<div id="outputContainer" class="mdc-card">
-				<div id="outputDiv">
-					<div class="header">Ouput</div>
-					<span class="outputSubHeader">View and share it online</span>
-					<button class="mdc-button mdc-button--raised outputBtn" onclick="goToSite();" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Go to personal website</span>
-					</button>
-					<button class="mdc-button mdc-button--raised outputBtn" onclick="copyURL();" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Copy personal url</span>
-					</button>
-					<span id='filler'></span>
-					<span class="outputSubHeader">Embed it into your own site</span>
-					<button class="mdc-button mdc-button--raised outputBtn" onclick="copyIFrameCode();" data-mdc-auto-init="MDCRipple">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Copy personal iFrame code</span>
-					</button>
 				</div>
 
-				<div id="madeBy">
-					Made by <a href="https://linktr.ee/jonathandelmeiren" target="_blank">Jonathan Delmeiren</a>
+				<div class="copyrightDiv">
+					<p>&#169 Copyright 2021 - <a href="https://linktr.ee/jonathandelmeiren" target="_blank">Jonathan Delmeiren</a></p>
 				</div>
 			</div>
-
-		</main>
-
-		<aside class="mdc-snackbar">
-			<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-				<div class="mdc-snackbar__label" aria-atomic="false">
-					Link copied!
-				</div>
-				<button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
-			</div>
-		</aside>
 
 		<script type="text/javascript">
 			window.mdc.autoInit();
-		</script>
 
-		<script>
-			var finalURL = "";
-			var finalIFrameCode = "";
-
-			function sendData() {
-				const visualisationURL = "https://jonathandelm.github.io/SMYK/SMYK";
-
-				var xAxisName = document.getElementById("xAxis").value;
-				var yAxisName = document.getElementById("yAxis").value;
-
-				var dataString = document.getElementById("data").value;
-				var array = dataString.split(/\r?\n/);
-				var data = [];
-				array.forEach(e => {
-					var line = e.split(',');
-					var val = {};
-					val.name = line[0];
-					val.value = line[1];
-					data.push(val);
-				});
-
-				var startingValue = document.getElementById("startingValue").value;
-				var hint = document.getElementById("hint").value;
-				var units = document.getElementById("units").value;
-
-				var dataObj = {
-					'data': data,
-					'initialEstValue': startingValue,
-					'xAxisName': xAxisName,
-					'yAxisName': yAxisName,
-					'hintBarID': hint,
-					'unitName': units
-				};
-
-				var iframeWin = document.getElementById("iFrameID");
-				var base64string = btoa(JSON.stringify(dataObj));
-
-				var url = visualisationURL + "?params=" + base64string;
-				iframeWin.src = url;
-				finalURL = url;
-
-				finalIFrameCode = "<iframe src='"+ url +"' id='iFrameID' frameborder='0' width='100%' height='507px'></iframe>";
-			}
-
-			window.onload = function () {
-				sendData();
-			};
-
-			function updateData() {
-				sendData();
-			}
-
-			function goToSite() {
-				window.open(finalURL);
-			}
-
-			var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
-			function copyURL() {
-				navigator.clipboard.writeText(finalURL);
-				snackbar.labelText = "Personal URL copied to clipboard!";
-				snackbar.open();
-			}
-
-			function copyIFrameCode() {
-				navigator.clipboard.writeText(finalIFrameCode);
-				snackbar.labelText = "iFrame code copied to clipboard!";
-				snackbar.open();
+			window.onbeforeunload = () => {
+				for(const form of document.getElementsByTagName('form')) {
+					form.reset();
+				}
 			}
 		</script>
 	</body>

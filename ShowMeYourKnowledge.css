@@ -4,135 +4,511 @@
 }
 
 html {
-	height: 100%;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
-	height: 100%;
 	margin: 0;
 }
 
-.content {
-	display: flex;
-	flex-direction: row;
-	justify-content: left;
-	height: Calc( 100% - 64px );
-}
-
-#inputDiv {
-	flex: 0 0 300px;
-	padding: 2em;
-	min-height: 800px;
-}
-
-#formDiv {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-	min-width: 300px;
-}
-
-.helperTextDiv {
-	display: flex;
-	flex-direction: column;
-}
-
-#previewDiv {
-	flex: 8;
-	display: flex;
-	flex-direction: column;
-	justify-content: baseline;
-	background-color: #fafafa;
-	padding: 2em;
-	min-width: 942px;
-}
-
-#iFrameDiv {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;	
-}
-
 .mdc-button {
-	height: 48px; 
+	height: 56px;
+	font-size: 16px;
+	font-weight: 600;
+	word-spacing: 1px;
+	letter-spacing: 1px;
+	padding: 0 30px;
 }
 
-#outputContainer {
-	flex: 0 0 364px;
+
+/* TITLE SECTION */
+
+.titleDiv {
+	height: fit-content;
+	padding-top: 150px;
+	padding-bottom: 150px;
+	background-image: linear-gradient(to bottom right, #6545CC, #7e57ff);
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.titleLeft {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	padding: 2em;
+	width: 35%;
 }
 
-#outputDiv {
+.titleText {
+	color: whitesmoke;
+}
+
+.title {
+	margin-top: 0;
+	margin-bottom: 48px;
+	font-weight: 900;
+}
+.titleH2 {
+	display: none;
+}
+
+.titleBtnTool {
+	--mdc-theme-primary: whitesmoke;
+	--mdc-theme-on-primary: #6545CC;
+	margin-right: 15px;
+}
+
+.titleBtnExample {
+	--mdc-theme-primary: whitesmoke;
+	--mdc-theme-on-primary: whitesmoke;
+	border: 1.5px solid whitesmoke !important;
+}
+
+.titleImgDiv {
+	width: 45%;
+}
+
+.titleImg {
+	border-radius: 10px;
+	box-shadow: 0 10px 20px 0 rgba(0,0,0,0.4);
+	width: 100%;
+}
+
+
+/* SELLING POINTS SECTION */
+
+.sellingPointsDiv {
+	height: fit-content;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	background-color: whitesmoke;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-#madeBy {
+.sellingPointsCardsDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card {
+	border-radius: 5px;
+	box-shadow: 0px 30px 40px -20px #a3a5ae;
+	padding: 30px;
+	margin: 50px;
+	margin-top: 0;  
+	width: 15%;
+	min-height: 180px;
+	border-top: 3px solid #6545CC;
+}
+
+.downCard {
+	position: relative;
+	top: 50px;
+}
+
+.card p {
+	color: #787b87;
+	font-size: 18px;
+}
+
+.card h2 {
+	color: #4c4e61;
+  font-weight: 600;
+}
+
+.sellingPointExampleBtn {
+	margin-top: 20px;
+}
+
+
+
+/* TOOL SECTION */
+
+.toolDiv {
+	height: fit-content;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	background-color: #7e57ff;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.toolImgDiv {
+	width: 45%;
+}
+
+.toolImg {
+	width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px 0 rgba(0,0,0,0.4);
+}
+
+.toolRight {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.toolHeaderDiv {
+	color: whitesmoke;
 	text-align: center;
-	font-weight: 300;
+}
+.toolHeader {
+	margin-top: 0;
+	margin-bottom: 48px;
+	font-weight: 900;
 }
 
-button {
-	font-size: 14px;
-}
-
-.header {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size: 2.2em;
-	padding-bottom: 0.8em;
-}
-
-.outputSubHeader {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size: 24px;
-	padding-bottom: 0.8em;
-}
-
-.outputBtn {
-	margin-bottom: 1em;
-}
-
-#filler {
-	height: 1em;
-}
-
-
-/* TOPBAR */
-.mdc-top-app-bar {
-	background-color: #6545CC;
-	height: 72px;
-}
-
-.mdc-top-app-bar__title {
-	font-weight: 100 ;
-	font-size: 32px ;
-	font-style: italic;
-	height: 48px;
-	line-height: 48px;
-}
-
-.topbarBtnRight {
-	margin-right: 20px;
-	width: 145px;
-}
-
-.topbarBtn {
-	margin-right: 10px;
-	width: 145px;
-}
-
-.topbarBtnText {
-	color: white;
-}
-
-.mdc-top-app-bar__row {
+.toolItemsContainer {
+	width: 75%;
 	display: flex;
-	justify-content: space-between;
-	padding: 12px;
+	flex-direction: column;
+}
+
+.toolItemDiv {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.number {
+	min-width: 42px;
+	min-height: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	border-radius: 32px;
+	color: #7e57ff;
+	font-size: 24px;
+	margin-right: 24px;
+}
+
+.toolItemDiv p {
+	margin: 0;
+	color: #e7e7e7;
+	font-size: 22px;
+}
+
+.toolBtnDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.toolBtn {
+	margin-top: 33px;
+	--mdc-theme-primary: whitesmoke;
+	--mdc-theme-on-primary: #6545CC;
+}
+
+
+/* RESEARCH SECTION */
+
+.researchDiv {
+	height: fit-content;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background-color: whitesmoke;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+}
+
+.researchContentDiv {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+}
+
+.researchContentDiv h2 {
+	margin-top: 0;
+	margin-bottom: 24px;
+	font-weight: 900;
+	color: #6545CC;
+}
+
+.researchContentDiv p {
+	font-size: 22px;
+	color:  #787b87;
+}
+
+.researchBtnDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.researchImgContainer {
+	width: 382px;
+	height: 400px;
+	position: relative;
+  top: 0;
+  right: 0;
+	margin-bottom: 100px;
+}
+
+.researchImg {
+	height: 400px;
+	box-shadow: 0 10px 20px 0 rgba(0,0,0,0.4);
+	border-radius: 5px;
+
+	-webkit-transition: width 0.1s, height 0.1s; 
+	transition: width 0.1s, height 0.1s, transform 0.1s;
+}
+
+.researchImg:hover
+{
+	height:420px;
+	z-index: 5;
+    transform: translateZ(0px);
+}
+
+.researchImg1 {
+	position: absolute;
+  top: 0;
+  left: 0;
+	z-index: 3;
+}
+
+.researchImg2 {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+	z-index: 2;
+}
+
+.researchImg3 {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+	z-index: 1;
+}
+
+
+/* FOOTER SECTION */
+
+.footerDiv {
+	height: 700px;
+	background-image: linear-gradient(to bottom right, #7e57ff, #6545CC);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.footerContentDiv {
+	flex: 1;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-items: center; */
+}
+
+.footerDiv h2 {
+	margin-top: 0;
+	color: whitesmoke;
+	font-weight: 900;
+}
+
+.footerForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.nameAndEmailDiv {
+	display: flex;
+	flex-direction: row;
+}
+
+.nameAndEmailDiv label {
+  flex: 1;
+	margin-bottom: 32px;
+}
+
+.nameInput {
+	margin-right: 32px;
+}
+
+.mdc-text-field {
+	--mdc-theme-primary: #6545CC;
+}
+
+.formBtn {
+	padding: 0 50px;
+	margin-top: 50px;
+	--mdc-theme-primary: whitesmoke;
+	--mdc-theme-on-primary: #6545CC;
+}
+
+.copyrightDiv {
+	margin-bottom: 12px;
+	display: flex;
+	justify-content: space-evenly;
+	color: whitesmoke;
+	font-size: 18px;
+}
+
+.copyrightDiv p a {
+	color: whitesmoke;
+}
+
+@media only screen and (max-width: 1200px) {
+  .titleDiv {
+		flex-direction: column;
+	}
+	.titleLeft {
+		width: 80%;
+		align-items: center;
+		text-align: center;
+		padding-bottom: 100px;
+	}
+	.titleBtnTool {
+		margin-right: 0;
+	}
+	.titleImgDiv {
+		width: 80%;
+	}
+
+	.sellingPointsCardsDiv {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+	}
+	.card {
+		padding: 15px;
+		margin: 10px;
+		width: 20%;
+	}
+
+	.toolDiv {
+		height: fit-content;
+		padding-top: 100px;
+		padding-bottom: 100px;
+		flex-direction: column-reverse;
+		justify-content: space-evenly;
+		align-items: center;
+	}
+	.toolRight {
+		width: 80%;
+		align-items: center;
+		padding-bottom: 50px;
+	}
+	.toolImgDiv {
+		width: 80%;
+		max-width: 700px;
+		display: flex;
+		justify-content: center;
+	}
+
+
+	.researchDiv {
+		height: fit-content;
+	}
+	.researchContentDiv {
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+	}
+	.researchImgContainer {
+		display: none;
+	}
+
+	.footerContentDiv {
+		width: 80%;
+	}
+}
+
+@media only screen and (max-width: 710px) {
+	.sellingPointsDiv {
+		height: fit-content;
+		padding-top: 75px;
+		padding-bottom: 75px;
+		background-color: whitesmoke;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.sellingPointsCardsDiv {
+		flex-direction: column;
+	}
+	.card {
+		width: 50%;
+		min-height: 0px;
+		padding: 30px;
+		margin-bottom: 50px;
+	}
+	.downCard {
+		position: relative;
+		top: 0px;
+	}
+}
+
+@media only screen and (max-width: 520px) {
+	.titleDiv {
+		height: fit-content;
+		padding-top: 75px;
+		padding-bottom: 75px;
+	}
+	.title {
+		display: none;
+	}
+	.titleH2 {
+		display: block;
+		font-weight: 900;
+		margin-top: 25px;
+		margin-bottom: 25px;
+	}
+	.titleButtons {
+		display: flex;
+		flex-direction: column;
+	}
+	.titleBtnTool {
+		margin-bottom: 10px;
+	}
+	.titleLeft {
+		width: 90%;
+		padding-bottom: 50px;
+	}
+	.titleImgDiv {
+		width: 90%;
+	}
+
+	.toolDiv {
+		padding-top: 75px;
+		padding-bottom: 75px;
+	}
+	.toolImgDiv {
+		width: 90%;
+	}
+	.toolRight {
+		width: 90%;
+	}
+	.toolItemDiv p {
+		font-size: 20px;
+	}
+
+	.researchDiv {
+		padding-top: 75px;
+		padding-bottom: 75px;
+	}
+	.researchContentDiv {
+		width: 90%;
+		margin: 0;
+	}
+	.researchContentDiv p {
+		font-size: 18px;
+	}
+
+	.footerContentDiv {
+		width: 90%;
+	}
 }

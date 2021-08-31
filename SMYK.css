@@ -1,0 +1,156 @@
+body {
+  font-family: 'Open Sans', 'Libre Franklin', sans-serif;
+  height: auto;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+}
+
+.container_div {
+  text-align: center;
+  
+  width: 900px;
+}
+
+.article {
+  width: 620px;
+  text-align: left;
+  display: inline-block;
+}
+
+.articleText {
+  padding-top: 20px;
+}
+
+#fullArticle {
+  padding-top: 35px;
+  width: 620px;
+  text-align: left;
+  display: none;
+}
+
+.feedback {
+	text-align: center;
+  margin-bottom: 25px;
+  height: 19.2px;
+}
+
+#comparison-container {
+  padding-bottom: 0px;
+}
+
+.grid line {
+	stroke: lightgrey;
+	stroke-opacity: 0.7;
+	shape-rendering: crispEdges;
+}
+.grid path {
+	stroke-width: 0;
+}
+
+#continueErrorMessage {
+  color: #ff0033;
+  font-weight: bold; 
+}
+
+#continueMessage {
+  text-align: left;
+}
+
+/* http://bl.ocks.org/davegotz/bd54b56723c154d25eedde6504d30ad7 */
+.d3-tip {
+	line-height: 1;
+	padding: 9px;
+	background: rgba(0, 0, 0, 1);
+	color: #fff;
+	border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+}
+.d3-tip:after {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent black transparent transparent;
+	top: 9.5px;
+  left: -12px;
+  pointer-events: none;
+}
+
+.d3-tip-hint {
+	line-height: 1;
+	padding: 9px;
+	background: rgba(0, 0, 0, 1);
+	color: #fff;
+	border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip-hint:after {
+  content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 6px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+	top: 31px;
+  left: 85px;
+  pointer-events: none;
+}
+
+.d3-tip-hint-comparing:after {
+  left: 93px;
+}
+
+/* DRAGGABLE FUCTIONALITY */
+.overlay, .handle--s {
+	pointer-events: none;
+}
+.selection {
+	fill: #3F3F3F;
+	fill-opacity: 1;
+	stroke: none;
+	cursor: default;
+	pointer-events: all;
+}
+.brush {
+  pointer-events: all;
+}
+
+#buttonDiv {
+  margin: 0 auto;
+}
+
+.textDiv {
+  text-align: center;
+  font-size: 18px;
+  color: #43464d;
+  line-height: 1.5em;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+}
+
+.mdc-button {
+  --mdc-theme-primary: #4c4c4c;
+  --mdc-theme-on-primary: white;
+
+  font-family: 'Open Sans', 'Libre Franklin', sans-serif;
+  text-transform: none;
+  letter-spacing: 0px;
+  font-size: 16px;
+  padding: 22px;
+}
+
+/* .createdWithDiv {
+  text-align: end;
+  font-size: 12px;
+} */

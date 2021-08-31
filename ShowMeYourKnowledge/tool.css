@@ -1,0 +1,224 @@
+:root {
+	--mdc-theme-primary: #7e57ff;
+	--mdc-theme-secondary: #b9a3ff;
+}
+
+html {
+	height: 100%;
+	min-height: 744px;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	height: Calc( 100% - 72px );
+	background-color: #fafafa;
+}
+
+.mdc-top-app-bar--fixed-adjust {
+	padding-top: 72px;
+}
+
+#inputDivContainer {
+	flex: 0 0 364px;
+	display:flex;
+   flex-direction:column;
+   height:100%
+}
+
+#inputDiv {
+	flex: 1 0;
+	padding: 2em;
+	height:0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#formDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	min-width: 300px;
+}
+
+#formDiv > label {
+	margin-bottom: 2rem;
+}
+
+#formDiv > div {
+	margin-bottom: 2rem;
+}
+
+.helperTextDiv {
+	display: flex;
+	flex-direction: column;
+}
+
+.mdc-text-field__resizer {
+	resize: vertical;
+}
+
+#previewDiv {
+	flex: 8;
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	background-color: #fafafa;
+	padding: 2em;
+	min-width: 942px;
+}
+
+#iFrameDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;	
+}
+
+.float {
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+	background-color: white;
+	padding: 20px 10px;
+}
+
+.floatSide {
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+	background-color: white;
+}
+
+
+.mdc-button {
+	height: 48px; 
+}
+
+#outputContainer {
+	flex: 0 0 364px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 2em;
+}
+
+#outputDiv {
+	display: flex;
+	flex-direction: column;
+}
+
+#madeBy {
+	text-align: center;
+	font-weight: 300;
+}
+
+button {
+	font-size: 14px;
+}
+
+.header {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 2.2em;
+	padding-bottom: 0.8em;
+}
+
+.headline {
+	color: #4c4e61;
+	margin-top: 0;
+	font-size: 42px;
+}
+
+.publishHeadline {
+	margin-bottom: 36px;
+}
+
+.outputSubHeader {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 24px;
+	padding-bottom: 0.8em;
+}
+
+.outputBtn {
+	margin-bottom: 1em;
+}
+
+#filler {
+	height: 1em;
+}
+
+
+/* TOPBAR */
+.mdc-top-app-bar {
+	background-color: #6545CC;
+	height: 72px;
+}
+
+.titleLogoDiv {
+	margin-left: 20px;
+	padding-top: 6px;
+	display: flex;
+	align-items: center;
+}
+
+.mdc-top-app-bar__title {
+	padding-top: 6px;
+	font-weight: 300 ;
+	font-size: 28px ;
+	height: 48px;
+	line-height: 48px;
+}
+
+.topbarBtnRight {
+	margin-right: 20px;
+	width: 145px;
+}
+
+.topbarBtn {
+	margin-right: 10px;
+	width: 145px;
+}
+
+.topbarBtnText {
+	color: white;
+}
+
+.mdc-top-app-bar__row {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px;
+}
+
+/* SCROLL BAR */
+#inputDiv::-webkit-scrollbar {
+  width: 20px;
+}
+
+#inputDiv::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#inputDiv::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+}
+
+#inputDiv::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+}
+
+#inputDiv::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+#inputDiv::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}

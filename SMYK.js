@@ -3,7 +3,6 @@ var data;
 var hintBarID;
 var xAxisName;
 var yAxisName;
-var unitName;
 var svg = null;
 var width;
 var height;
@@ -63,7 +62,6 @@ window.addEventListener("load", function(event) {
 		data = setData(dataObj.data, dataObj.initialEstValue, hintBarID);
 		xAxisName = dataObj.xAxisName;
 		yAxisName = dataObj.yAxisName;
-		unitName = dataObj.unitName;
 	} else {
 		hintBarID = 5;
 		initialEstValue = 20000;
@@ -77,9 +75,8 @@ window.addEventListener("load", function(event) {
 			{ name: "70-79", value: 55547, est: initialEstValue },
 			{ name: "80+", value: 81058, est: initialEstValue }
 		];
-		xAxisName = "Leeftijdscategorie";
-		yAxisName = "Aantal bevestigde besmettingen";
-		unitName = "cases";
+		xAxisName = "Age group";
+		yAxisName = "Number of cases";
 	}
 	width = 1000;
 	height = 500;
@@ -115,6 +112,17 @@ window.addEventListener("load", function(event) {
 
 	tool_tip_hint = d3.tip()
 		.attr("class", "d3-tip-hint")
+		.offset(function(d){
+			return [-20,0];
+		})
+		.html(
+			function(d) {
+				return "This bar is given as a hint"; 
+			}
+		);
+
+	tool_tip_hint_comparing = d3.tip()
+		.attr("class", "d3-tip-hint d3-tip-hint-comparing")
 		.offset(function(d){
 			return [-20,0];
 		})
@@ -198,6 +206,9 @@ window.addEventListener("load", function(event) {
 		.attr("font-family", "'Libre Franklin', sans-serif")
 		.text(yAxisName);
 
+	tool_tip_hint.show(data[hintBarID], document.getElementById("bar" + hintBarID));
+	document.getElementById("button").disabled = true;
+
 	initialized = true;
 }, false);
 
@@ -205,6 +216,8 @@ window.addEventListener("load", function(event) {
 d3.select("button").on("click", function(event) {	
 
 	document.getElementById("button").style.display="none";
+	document.getElementById("textDiv").style.visibility="hidden";
+	tool_tip_hint.hide(data[hintBarID], document.getElementById("bar" + hintBarID));
 
 	// DELETE ESTIMATE
 	svg.selectAll("*").remove();
@@ -238,7 +251,7 @@ d3.select("button").on("click", function(event) {
 		svg.append("g").call(make_y_gridlines);
 
 	svg.call(tool_tip);
-	svg.call(tool_tip_hint);
+	svg.call(tool_tip_hint_comparing);
 
 	// ADD BAR 'OUTLINE' => GREY ZONE
 	svg
@@ -391,6 +404,8 @@ function brushmoveY() {
 function startMoveY() {
 	animating = true;
 
+	tool_tip_hint.hide(data[hintBarID], document.getElementById("bar" + hintBarID));
+
 	var d = d3.select(this).select('.selection');
 	if (initialized) {
 		for (var i=0; i<data.length; i++) {
@@ -402,6 +417,8 @@ function startMoveY() {
 
 function endMoveY() {
 	animating = false;
+
+	document.getElementById("button").disabled = false;
 
 	var d = d3.select(this).select('.selection');
 	if (initialized) {
@@ -484,7 +501,7 @@ function arrowHead(d, i) {
 // Add interactivity
 function handleMouseOver(d, i, est = false) {
 	if (i == hintBarID) {
-		tool_tip_hint.show(data[i], document.getElementById("bar" + i));
+		tool_tip_hint_comparing.show(data[i], document.getElementById("bar" + i));
 	}
 
 	if (est) {
@@ -510,7 +527,7 @@ function handleMouseOver(d, i, est = false) {
 
 function handleMouseOut(d, i) {
 	if (i == hintBarID) {
-		tool_tip_hint.hide(data[i], document.getElementById("bar" + i));
+		tool_tip_hint_comparing.hide(data[i], document.getElementById("bar" + i));
 	}
 
 	tool_tip.hide(d, document.getElementById("bar" + i));
@@ -583,9 +600,9 @@ function setFeedback(d, i) {
 	} else {
 		var diff = Math.abs(d.value - d.est);
 		if (d.est > d.value) {
-			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorDownText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> "+ unitName +" <span style='color: " + colorDownText + ";'><b> lower </b></span> than you estimated.";
+			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorDownText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> <span style='color: " + colorDownText + ";'><b> lower </b></span> than you estimated.";
 		} else {
-			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorUpText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> "+ unitName +" <span style='color: " + colorUpText + ";'><b> higher </b></span> than you estimated.";
+			document.getElementById("feedback").innerHTML = "The correct value for " + d.name + " was <span style='color: " + colorUpText + ";'><b>" + d3.format(" ,")(diff) + " </b></span> <span style='color: " + colorUpText + ";'><b> higher </b></span> than you estimated.";
 		}
 	}	
 }

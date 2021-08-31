@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Me Your Knowledge!</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+		<link rel="icon" href="../assets/favicon.ico">
+		<link rel="stylesheet" href="share.css">
+	</head>
+	<body>
+		<div class="containerDiv">
+			<iframe class="iFrame" id='iFrameID' frameborder='0' width='940px' height='507px'></iframe>
+		</div>
+
+		<div class="footer">
+			<p>Created with <a href="https://jonathandelm.github.io/ShowMeYourKnowledge" target="_blank">Show Me Your Knowledge</a></p>
+		</div>
+
+		<script>
+			const visualisationURL = "https://jonathandelm.github.io/SMYK"
+
+			window.onload = function () {
+				var iframeWin = document.getElementById("iFrameID");
+
+				const queryString = window.location.search;
+				var url = visualisationURL + queryString;
+				iframeWin.src = url;
+			};
+		</script>
+	</body>
+</html>
